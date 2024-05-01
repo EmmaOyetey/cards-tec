@@ -35,4 +35,9 @@ public abstract class Card {
         this.suit = suit;
     }
 
+    @Override
+    public String toString() {
+        return suit.toString() + " " + symbol;
+    }
+
 }
