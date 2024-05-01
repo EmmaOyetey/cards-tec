@@ -1,6 +1,6 @@
 package org.example.card;
 
-public abstract class Card {
+public class Card {
     private int value;
     private String symbol;
     private Suit suit;
