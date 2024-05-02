@@ -1,6 +1,8 @@
 package org.example;
 
 import org.example.deck.Deck;
+import org.example.user.User;
+import org.example.user.UserInteraction;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,6 +25,9 @@ public class Main {
         deck.sortDeck();
         deck.printDeck();
 
+        UserInteraction myUser = new UserInteraction();
+
+        myUser.removeALLCards();
 
     }
 }
