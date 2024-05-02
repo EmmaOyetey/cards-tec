@@ -15,15 +15,5 @@ public class User {
 
 
     public User() {
-        myDeck.createFullDeck();
-        System.out.println("hand");
-        System.out.println(hand);
-        hand.add(myDeck.dealCard());
-        hand.add(myDeck.dealCard());
-        hand.add(myDeck.dealCard());
-        hand.add(myDeck.dealCard());
-        hand.add(myDeck.dealCard());
-        System.out.println("hand");
-        System.out.println(hand);
     }
 }

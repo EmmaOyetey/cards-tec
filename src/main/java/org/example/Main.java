@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.card.SortBySuitThenValue;
+import org.example.card.Suit;
 import org.example.deck.Deck;
 import org.example.user.User;
 import org.example.user.UserInteraction;
@@ -24,10 +26,5 @@ public class Main {
         System.out.println("sorted deck");
         deck.sortDeck();
         deck.printDeck();
-
-        UserInteraction myUser = new UserInteraction();
-
-        myUser.removeALLCards();
-
     }
 }
