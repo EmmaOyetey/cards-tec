@@ -3,13 +3,14 @@ package org.example.user;
 import org.example.card.Card;
 import org.example.card.SortBySuitThenValue;
 import org.example.card.Suit;
+import org.example.card.Suit;
+import org.example.deck.Deck;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
 
 public class UserInteraction extends User {
-
 
     public Optional<Card> removeFromHand(Suit suit, int value) {
         // array of cards hand - select a card to dicard/play select by suit and value
@@ -41,16 +42,23 @@ public class UserInteraction extends User {
         return discardedHand;
     };
 
-    public Card drawACard(){
+    public void drawACard(Card card){
+        if(card != null) {
+            hand.add(card);
+        }
+//                return ??
         //take a new card from the deck
-        //adding a card to thier hand thier array of cards.
+        //adding a card to their hand their array of cards.
     };
 
-    public Card shuffleHand(){
-        // reorder cards in the hand - eg old maid
-    };
+//    public Card shuffleHand(){
+//        // reorder cards in the hand - eg old maid
+//    };
 
-    public Card RemoveCardByIndex(){
+    public void removeCardByIndex(int index){
+        if(!hand.isEmpty()) {
+            hand.remove(index);
+        }
         //player is selecting a card from other players hand
         // index of the  players hand
     };

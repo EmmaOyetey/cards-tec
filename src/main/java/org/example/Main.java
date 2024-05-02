@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.card.SortBySuitThenValue;
+import org.example.card.Card;
 import org.example.card.Suit;
 import org.example.deck.Deck;
 import org.example.user.User;
@@ -16,12 +17,12 @@ public class Main {
 
     //print the initial deck
         System.out.println("inital deck");
-        deck.createFullDeck();
-        deck.printDeck();
+//        deck.createFullDeck();
+//        deck.printDeck();
 
         System.out.println("shuffled deck");
-        deck.shuffleDeck();
-        deck.printDeck();
+//        deck.shuffleDeck();
+//        deck.printDeck();
 
         System.out.println("sorted deck");
         deck.sortDeck();
