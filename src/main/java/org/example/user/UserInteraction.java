@@ -3,8 +3,6 @@ package org.example.user;
 import org.example.card.Card;
 import org.example.card.SortBySuitThenValue;
 import org.example.card.Suit;
-import org.example.card.Suit;
-import org.example.deck.Deck;
 
 import java.util.ArrayList;
 import java.util.Collections;
