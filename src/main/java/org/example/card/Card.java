@@ -37,7 +37,7 @@ public class Card {
 
     @Override
     public String toString() {
-        return suit.toString() + " " + symbol;
+        return suit.getSuitSymbol().toString() + " " + symbol + " " + value;
     }
 
 }
