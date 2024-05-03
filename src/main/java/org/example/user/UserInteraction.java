@@ -49,9 +49,10 @@ public class UserInteraction extends User {
         //adding a card to their hand their array of cards.
     };
 
-//    public Card shuffleHand(){
-//        // reorder cards in the hand - eg old maid
-//    };
+    public void shuffleHand(){
+        // reorder cards in the hand - eg old maid
+        Collections.shuffle(hand);
+    };
 
     public void removeCardByIndex(int index){
         if(!hand.isEmpty()) {
@@ -61,8 +62,9 @@ public class UserInteraction extends User {
         // index of the  players hand
     };
 
-    public Card getHand() {
-     //   read your hand - exisiting hand as it changes through the game
-    };
+    public ArrayList<Card> getHand() {
+        return new ArrayList<>(hand);
+    }
+     //   read your hand - existing hand as it changes through the game
 
 }
