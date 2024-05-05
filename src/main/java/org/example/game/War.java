@@ -5,6 +5,7 @@ import org.example.deck.Deck;
 import org.example.user.UserInteraction;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class War {
     private final Deck warDeck;
@@ -62,9 +63,11 @@ public class War {
 
             // Handle the game outcome
             if (comparison > 0) {
+                Collections.shuffle(cardsInPlay); // added shuffle to randomise the order cards added to winner
                 addCardsToHand(bill, cardPlayedByBill, cardPlayedByPlayerOne);
                 System.out.println("bill wins add to his deck" + bill.getHand());
             } else if (comparison < 0) {
+                Collections.shuffle(cardsInPlay);
                 addCardsToHand(playerOne, cardPlayedByBill, cardPlayedByPlayerOne);
                 System.out.println("player1 wins add to his deck" + playerOne.getHand());
             } else {
