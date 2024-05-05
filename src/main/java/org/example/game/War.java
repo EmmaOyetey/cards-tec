@@ -29,8 +29,8 @@ public class War {
     }
 
     private void dealInitialHands() {
-        // Deal cards to players alternately until the deck is empty
-        while (true) {
+        // Deal cards to players alternately until their hands are full
+        while (bill.getHand().size() < 26 && playerOne.getHand().size() < 26) {
             Card cardForBill = warDeck.dealCard(bill);
             if (cardForBill == null) break; // Deck is empty
             bill.drawACard(cardForBill);
@@ -63,17 +63,25 @@ public class War {
 
             // Handle the game outcome
             if (comparison > 0) {
-                Collections.shuffle(cardsInPlay); // added shuffle to randomise the order cards added to winner
-                addCardsToHand(bill, cardPlayedByBill, cardPlayedByPlayerOne);
-                System.out.println("bill wins add to his deck" + bill.getHand());
+                Collections.shuffle(cardsInPlay);
+                addCardsToHand(bill);
+                System.out.println("Bill wins and adds cards to his deck: " + bill.getHand());
             } else if (comparison < 0) {
                 Collections.shuffle(cardsInPlay);
-                addCardsToHand(playerOne, cardPlayedByBill, cardPlayedByPlayerOne);
-                System.out.println("player1 wins add to his deck" + playerOne.getHand());
+                addCardsToHand(playerOne);
+                System.out.println("Player One wins and adds cards to his deck: " + playerOne.getHand());
             } else {
                 // War scenario
                 System.out.println("War");
 
+                if (bill.getHand().size() < 4) {
+                    System.out.println("Player One wins! Bill doesn't have enough cards for a war.");
+                    return; // End the game
+                }
+                if (playerOne.getHand().size() < 4) {
+                    System.out.println("Bill wins! Player One doesn't have enough cards for a war.");
+                    return; // End the game
+                }
                 // Add 4 cards from each player's hand to cardsInPlay
                 for (int i = 0; i < 4; i++) {
                     cardsInPlay.add(bill.getHand().remove(bill.getHand().size() - 1)); // Add card from Bill's hand
@@ -91,11 +99,11 @@ public class War {
                 System.out.println("lastCard" + lastCard + "fifthLastCard" + fifthToLastCard);
                 // Handle the outcome of the war
                 if (warComparison > 0) {
-                    addCardsToHand(bill);
-                    System.out.println("bill wins cards" + bill.getHand());
-                } else {
                     addCardsToHand(playerOne);
                     System.out.println("player! wins cards" + playerOne.getHand());
+                } else {
+                    addCardsToHand(bill);
+                    System.out.println("bill wins cards" + bill.getHand());
                 }
             }
 
@@ -112,8 +120,8 @@ public class War {
         }
     }
 
-    private void addCardsToHand(UserInteraction user, Card... cards) {
-        for (Card card : cards) {
+    private void addCardsToHand(UserInteraction user) {
+        for (Card card : cardsInPlay) {
             user.getHand().add(0, card); // Add cards to the start of the hand
         }
         cardsInPlay.clear();
