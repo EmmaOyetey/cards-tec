@@ -7,13 +7,12 @@ import org.example.user.UserInteraction;
 import java.util.ArrayList;
 
 public class War {
-    private Deck warDeck;
-    private UserInteraction bill;
-    private UserInteraction playerOne;
-    private ArrayList<Card> cardsInPlay;
+    private final Deck warDeck;
+    private final UserInteraction bill;
+    private final UserInteraction playerOne;
+    private final ArrayList<Card> cardsInPlay;
 
     public War() {
-        super();
         // Initialize a new deck
         warDeck = new Deck();
         warDeck.createFullDeck();
@@ -39,67 +38,89 @@ public class War {
             if (cardForPlayerOne == null) break; // Deck is empty
             playerOne.drawACard(cardForPlayerOne);
         }
-
-
     }
 
-  //  @Override
     public void play() {
-        // print players hands to check
+        // Print players' hands before the game starts
         System.out.println("Bill's hand: " + bill.getHand());
         System.out.println("Player One's hand: " + playerOne.getHand());
 
+        // Main game loop
+        while (!bill.getHand().isEmpty() && !playerOne.getHand().isEmpty()) {
+            // Remove the last card from Bill's hand and play it
+            Card cardPlayedByBill = bill.getHand().remove(bill.getHand().size() - 1);
+            cardsInPlay.add(cardPlayedByBill);
+            System.out.println("cards in play" + cardsInPlay);
 
-// Remove the last card from Bill's hand and play it
-        Card cardPlayedByBill = bill.getHand().remove(bill.getHand().size() - 1);
-        cardsInPlay.add(cardPlayedByBill);
-        System.out.println("card played by bill" + cardPlayedByBill);
-        System.out.println("cards in play" + cardsInPlay);
+            // Remove the last card from Player One's hand and play it
+            Card cardPlayedByPlayerOne = playerOne.getHand().remove(playerOne.getHand().size() - 1);
+            cardsInPlay.add(cardPlayedByPlayerOne);
+            System.out.println("cards in play" + cardsInPlay);
 
-// Remove the last card from Player One's hand and play it
-        Card cardPlayedByPlayerOne = playerOne.getHand().remove(playerOne.getHand().size() - 1);
-        cardsInPlay.add(cardPlayedByPlayerOne);
-        System.out.println("card played by playerone " + cardPlayedByPlayerOne);
-        System.out.println("cards in play " + cardsInPlay);
+            // Compare the cards played by Bill and Player One
+            int comparison = cardPlayedByBill.getValue() - cardPlayedByPlayerOne.getValue();
 
-// Compare the cards played by Bill and Player One
-        int comparison = cardPlayedByBill.getValue() - cardPlayedByPlayerOne.getValue();
+            // Handle the game outcome
+            if (comparison > 0) {
+                addCardsToHand(bill, cardPlayedByBill, cardPlayedByPlayerOne);
+                System.out.println("bill wins add to his deck" + bill.getHand());
+            } else if (comparison < 0) {
+                addCardsToHand(playerOne, cardPlayedByBill, cardPlayedByPlayerOne);
+                System.out.println("player1 wins add to his deck" + playerOne.getHand());
+            } else {
+                // War scenario
+                System.out.println("War");
 
-// If Bill's card has a higher value, add both cards to start of Bill's hand
-        if (comparison > 0) {
-            bill.getHand().add(0, cardPlayedByBill);
-            bill.getHand().add(0, cardPlayedByPlayerOne);
-            System.out.println( "bills hand" + bill.getHand());
-            System.out.println("playerOne hand " + playerOne.getHand());
-        } else if (comparison < 0) {
-            // If Player One's card has a higher value, add both cards to Player One's hand
-            playerOne.getHand().add(0, cardPlayedByBill);
-            playerOne.getHand().add(0, cardPlayedByPlayerOne);
-            System.out.println("bills hand " + bill.getHand());
-            System.out.println("playerone hand" + playerOne.getHand());
+                // Add 4 cards from each player's hand to cardsInPlay
+                for (int i = 0; i < 4; i++) {
+                    cardsInPlay.add(bill.getHand().remove(bill.getHand().size() - 1)); // Add card from Bill's hand
+                }
+                for (int i = 0; i < 4; i++) {
+                    cardsInPlay.add(playerOne.getHand().remove(playerOne.getHand().size() - 1)); // Add card from Player One's hand
+                }
+                System.out.println(cardsInPlay);
+                // Compare the last card with the fifth-to-last card
+                int lastIndex = cardsInPlay.size() - 1;
+                int fifthToLastIndex = lastIndex - 4;
+                Card lastCard = cardsInPlay.get(lastIndex);
+                Card fifthToLastCard = cardsInPlay.get(fifthToLastIndex);
+                int warComparison = lastCard.getValue() - fifthToLastCard.getValue();
+                System.out.println("lastCard" + lastCard + "fifthLastCard" + fifthToLastCard);
+                // Handle the outcome of the war
+                if (warComparison > 0) {
+                    addCardsToHand(bill);
+                    System.out.println("bill wins cards" + bill.getHand());
+                } else {
+                    addCardsToHand(playerOne);
+                    System.out.println("player! wins cards" + playerOne.getHand());
+                }
+            }
+
+            // Print players' hands after each round
+            System.out.println("Bill's hand: " + bill.getHand());
+            System.out.println("Player One's hand: " + playerOne.getHand());
+        }
+
+        // Determine the winner
+        if (bill.getHand().isEmpty()) {
+            System.out.println("Player One wins!");
         } else {
-            // Handle the case where the cards have equal value (a "war" scenario)
-            // This logic depends on how you want to handle ties in the game
-            System.out.println("War");
+            System.out.println("Bill wins!");
         }
     }
 
-//    @Override
-//    public boolean playAgain() {
-//        // Implement whether the game should be played again
-//        // For simplicity, let's just return false here
-//        return false;
-//    }
+    private void addCardsToHand(UserInteraction user, Card... cards) {
+        for (Card card : cards) {
+            user.getHand().add(0, card); // Add cards to the start of the hand
+        }
+        cardsInPlay.clear();
+    }
 
     public static void main(String[] args) {
         War warGame = new War();
-
         warGame.play();
     }
-
-
 }
-
 //public class WarCardGame {
 //    // Declare instances for bill and player
 //    private UserInteraction billInteraction;
