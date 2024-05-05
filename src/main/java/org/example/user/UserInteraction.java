@@ -10,6 +10,15 @@ import java.util.Optional;
 
 public class UserInteraction extends User {
 
+    private ArrayList<Card> hand = new ArrayList<>();
+
+
+    //constructor
+    public UserInteraction() {
+        // Initialize the hand
+        hand = new ArrayList<>();
+    }
+
     public Optional<Card> removeFromHand(Suit suit, int value) {
         // array of cards hand - select a card to dicard/play select by suit and value
         //return the card
@@ -63,8 +72,20 @@ public class UserInteraction extends User {
     };
 
     public ArrayList<Card> getHand() {
-        return new ArrayList<>(hand);
+        return hand;
     }
      //   read your hand - existing hand as it changes through the game
 
 }
+
+//public void clearHand() {
+//    hand.clear();
+//}
+
+//added a constructor to initialize the hand ArrayList,
+//to ensure that each instance of UserInteraction will have an empty hand when created,
+// for consistency.
+//
+//to consider --- adding error handling or validation
+//in your methods  For example, you could check for null
+//inputs in drawACard, or handle cases where the hand is empty in methods like removeCardByIndex.
