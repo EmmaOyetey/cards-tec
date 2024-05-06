@@ -62,10 +62,12 @@ public class War {
                 Collections.shuffle(cardsInPlay);
                 addCardsToHand(bill);
                 System.out.println("I win! I'll take those cards!");
+                System.out.println("Cards in my hand: " + bill.getHand().size() + " Cards in your hand : " + playerOne.getHand().size());
                 } else if (comparison < 0) {
                     Collections.shuffle(cardsInPlay);
                     addCardsToHand(playerOne);
                     System.out.println("You win! i've added them to your pile");
+                    System.out.println("Cards in my hand: " + bill.getHand().size() + " Cards in your hand : " + playerOne.getHand().size());
                     } else {
                        war();
             }
@@ -141,9 +143,12 @@ private void war(){
     if (warComparison > 0) {
         addCardsToHand(playerOne);
         System.out.println("You won the WAR and collect all the cards" );
+        System.out.println("Cards in my hand: " + bill.getHand().size() + " Cards in your hand : " + playerOne.getHand().size());
     } else if (warComparison < 0) {
         addCardsToHand(bill);
         System.out.println("I won the WAR! I collect all the cards");
+        System.out.println("Cards in my hand: " + bill.getHand().size() + " Cards in your hand : " + playerOne.getHand().size());
+
     } else {
         war();
     }
@@ -181,6 +186,7 @@ private void printCardsInPlay() {
 //        printCard(fifthToLastCard);
 //        printCard(lastCard);
         }
+
     }
 }
 
