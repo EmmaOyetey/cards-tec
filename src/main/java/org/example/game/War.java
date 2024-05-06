@@ -173,10 +173,14 @@ private void printCardsInPlay() {
         // More than two cards in play
         Card lastCard = cardsInPlay.get(numCardsInPlay - 1);
         Card fifthToLastCard = cardsInPlay.get(numCardsInPlay - 5);
-
-        // Print the last card and the fifth-to-last card
-        printCard(fifthToLastCard);
-        printCard(lastCard);
+        String[] firstCardLines = cardToAscii(fifthToLastCard).split("\n");
+        String[] secondCardLines = cardToAscii(lastCard).split("\n");
+        for (int i = 0; i < firstCardLines.length; i++) {
+            System.out.println(firstCardLines[i] + "    " + secondCardLines[i]);
+            // Print the last card and the fifth-to-last card
+//        printCard(fifthToLastCard);
+//        printCard(lastCard);
+        }
     }
 }
 
@@ -191,19 +195,18 @@ private String cardToAscii(Card card) {
             " --------- \n";
 }
 
+public static void playCard(Runnable printCardsInPlay) {
+    Scanner scanner = new Scanner(System.in);
 
-    public static void playCard(Runnable printCardsInPlay) {
-        Scanner scanner = new Scanner(System.in);
+    //System.out.println("Hit Enter to play...");
+    String inputLine = scanner.nextLine(); // Read the input line
 
-        //System.out.println("Hit Enter to play...");
-        String inputLine = scanner.nextLine(); // Read the input line
-
-        if (!inputLine.isEmpty()) {
-            System.out.println("Invalid input. Press Enter to trigger the action.");
-        } else {
-            printCardsInPlay.run();
-        }
+    if (!inputLine.isEmpty()) {
+        System.out.println("Invalid input. Press Enter to trigger the action.");
+    } else {
+        printCardsInPlay.run();
     }
+}
 
 
 
