@@ -53,6 +53,7 @@ public class Blackjack extends Game {
         while (!gameOver) {
             if (playerFinished.get(playerTurn)) {
                 System.out.println("Player " + (playerTurn + 1) + " is done for this round");
+                playerTurn = (playerTurn + 1) % playerCount;
                 continue;
             }
             UserInteraction currentPlayer = users.get(playerTurn);
@@ -65,10 +66,18 @@ public class Blackjack extends Game {
             System.out.println(playerHand);
             System.out.println("Score: " + playerScores.get(playerTurn));
 
+            // TODO: Fix the display of choice confirmation in Commands
             int choice = commands.displayChoices(choices);
             System.out.println("You chose: " + choice);
             if (choice == 0) {
-
+                currentPlayer.drawACard(deck.dealCard());
+                // TODO: Create new blackjack deck for correct scoring
+                int newScore = playerHand.stream().reduce(0, (subtotal, card) -> subtotal + card.getValue(), Integer::sum);
+                System.out.println("Your score is now: " + newScore);
+                if (newScore > 21) {
+                    System.out.println("You went over 21 :(");
+                    playerFinished.set(playerTurn, true);
+                }
             } else {
                 playerFinished.set(playerTurn, true);
             }
