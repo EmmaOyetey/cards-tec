@@ -6,12 +6,16 @@ import org.example.user.UserInteraction;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 public class War {
     private final Deck warDeck;
     private final UserInteraction bill;
     private final UserInteraction playerOne;
     private final ArrayList<Card> cardsInPlay;
+    private Card cardPlayedByBill;
+    private Card cardPlayedByPlayerOne;
+
 
     public War() {
         // Initialize a new deck
@@ -43,22 +47,27 @@ public class War {
 
     public void play() {
         // Print players' hands before the game starts
-        System.out.println("Bill's hand: " + bill.getHand());
-        System.out.println("Player One's hand: " + playerOne.getHand());
+        System.out.println("Welcome to War. You are playing against Bill");
+        System.out.println("Hey i'm Bill. Lets War!.");
 
         // Main game loop
         while (!bill.getHand().isEmpty() && !playerOne.getHand().isEmpty()) {
-            // Remove the last card from Bill's hand and play it
+
+
+
+            System.out.println("I've played");
             Card cardPlayedByBill = bill.getHand().remove(bill.getHand().size() - 1);
             cardsInPlay.add(cardPlayedByBill);
-            System.out.println("cards in play" + cardsInPlay);
+            //System.out.println("cards in play" + cardsInPlay);
             printCardsInPlay();
+//            playCard(this::printCardsInPlay);
 
-            // Remove the last card from Player One's hand and play it
+            System.out.println("Your turn");
             Card cardPlayedByPlayerOne = playerOne.getHand().remove(playerOne.getHand().size() - 1);
             cardsInPlay.add(cardPlayedByPlayerOne);
-            System.out.println("cards in play" + cardsInPlay);
-            printCardsInPlay();
+            //System.out.println("cards in play" + cardsInPlay);
+            //printCardsInPlay();
+            playCard(this::printCardsInPlay);
 
             // Compare the cards played by Bill and Player One
             int comparison = cardPlayedByBill.getValue() - cardPlayedByPlayerOne.getValue();
@@ -122,6 +131,11 @@ public class War {
         }
     }
 
+    // Remove the last card from Bill's hand and play it
+
+
+    // Remove the last card from Player One's hand and play it
+
     private void addCardsToHand(UserInteraction user) {
         for (Card card : cardsInPlay) {
             user.getHand().add(0, card); // Add cards to the start of the hand
@@ -167,6 +181,33 @@ private String cardToAscii(Card card) {
             "|        " + card.getSymbol() + "|\n" +
             " --------- \n";
 }
+
+
+    public static void playCard(Runnable printCardsInPlay) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Hit Enter to play...");
+        String inputLine = scanner.nextLine(); // Read the input line
+
+        if (!inputLine.isEmpty()) {
+            System.out.println("Invalid input. Press Enter to trigger the action.");
+        } else {
+            printCardsInPlay.run();
+        }
+    }
+
+    //to pass a method reference as a parameter, you can use a functional interface like Runnable or Consumer.
+    //This allows you to pass a method reference or lambda expression that matches
+    // the Runnable interface to the playCard method,
+    // //and it will execute that code when Enter or Space is pressed.
+    //the playCard method above now enables the printCardsInPlay method to be passed as a parameter
+    // and be called  when needed. To call it use
+    // playCard(this::printCardsInPlay) or with a lambda expression
+    // playCard(() -> printCardsInPlay()) where you want to trigger it.
+
+
+
+
 
 
 }

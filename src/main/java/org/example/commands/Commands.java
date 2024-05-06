@@ -3,7 +3,7 @@ package org.example.commands;
 import java.util.List;
 import java.util.Scanner;
 
-public class Commands {
+public class   Commands {
     final private Scanner scanner = new Scanner(System.in);
 
     public int displayChoices(List<String> choices) {
