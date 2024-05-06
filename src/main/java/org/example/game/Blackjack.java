@@ -20,6 +20,7 @@ public class Blackjack extends Game {
     private Commands commands = new Commands();
     static final List<String> choices = Arrays.asList("Hit", "Stay");
     private List<Integer> playerScores = new ArrayList<Integer>();
+    private List<Boolean> playerFinished = new ArrayList<Boolean>();
 
     public Blackjack(String rules, int playerCount) {
         super("Blackjack", rules);
@@ -27,6 +28,7 @@ public class Blackjack extends Game {
         for (int i = 0; i < playerCount; i++) {
             users.add(new UserInteraction());
             playerScores.add(0);
+            playerFinished.add(false);
         }
 
         Deck freshDeck = new Deck();
@@ -49,24 +51,32 @@ public class Blackjack extends Game {
         printRules();
         dealToAllPlayers();
         while (!gameOver) {
+            if (playerFinished.get(playerTurn)) {
+                System.out.println("Player " + (playerTurn + 1) + " is done for this round");
+                continue;
+            }
             UserInteraction currentPlayer = users.get(playerTurn);
             System.out.println("Player " + (playerTurn + 1) + "'s turn:");
 
             ArrayList<Card> playerHand = currentPlayer.getHand();
             playerScores.set(playerTurn, playerHand.stream()
-                    .reduce(0, (subtotal, card) -> {
-                        return subtotal + card.getValue();
-                    }, Integer::sum));
+                    .reduce(0, (subtotal, card) -> subtotal + card.getValue(), Integer::sum));
 
             System.out.println(playerHand);
             System.out.println("Score: " + playerScores.get(playerTurn));
 
             int choice = commands.displayChoices(choices);
             System.out.println("You chose: " + choice);
+            if (choice == 0) {
 
-//            gameOver = true;
+            } else {
+                playerFinished.set(playerTurn, true);
+            }
+
+            gameOver = playerFinished.stream().reduce(true, (allPlayersFinished, playerFinish) -> allPlayersFinished && playerFinish, Boolean::logicalAnd);
             playerTurn = (playerTurn + 1) % playerCount;
         }
+        System.out.println("Game finished");
     }
 
     public boolean playAgain() {
