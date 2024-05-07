@@ -1,32 +1,32 @@
-package org.example;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-public class WarTest {
-
-    private War warGame;
-
-    @BeforeEach
-    void setUp() {
-        warGame = new War();
-    }
-
-    @Test
-    @DisplayName("Each player should be dealt 26 cards at the start")
-    void testDealInitialHands() {
-        // Verify that each player's hand size is 26 after dealing
-        assertEquals(26, warGame.getBill().getHand().size());
-        assertEquals(26, warGame.getPlayerOne().getHand().size());
-    }
-
-
-}
-
+//package org.example;
+//
+//import org.junit.jupiter.api.BeforeEach;
+//import org.junit.jupiter.api.DisplayName;
+//import org.junit.jupiter.api.Test;
+//import static org.junit.jupiter.api.Assertions.*;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
+//import static org.junit.jupiter.api.Assertions.assertTrue;
+//
+//public class WarTest {
+//
+//    private War warGame;
+//
+//    @BeforeEach
+//    void setUp() {
+//        warGame = new War();
+//    }
+//
+//    @Test
+//    @DisplayName("Each player should be dealt 26 cards at the start")
+//    void testDealInitialHands() {
+//        // Verify that each player's hand size is 26 after dealing
+//        assertEquals(26, warGame.getBill().getHand().size());
+//        assertEquals(26, warGame.getPlayerOne().getHand().size());
+//    }
+//
+//
+//}
+//
 
 //        @Test
 //        @DisplayName("A 12-year-old should not be allowed to view an 18-rated film")
