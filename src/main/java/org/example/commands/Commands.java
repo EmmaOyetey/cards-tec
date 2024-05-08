@@ -18,14 +18,9 @@ public class Commands {
         int input = -1;
         while (input >= choices.size() || input < 0) {
             input = scanner.nextInt();
-            if (input > choices.size() || input < choices.size()) {
-                System.out.printf("Please enter a number between 0 and %d",
-                        choices.size() - 1);
-            }
+            System.out.printf("Please enter a number between 0 and %d\n",
+                    choices.size() - 1);
         }
         return input;
     }
-
-
-
 }
