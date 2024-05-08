@@ -4,9 +4,13 @@ import org.example.card.Card;
 import org.example.deck.Deck;
 import org.example.user.UserInteraction;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
+
+import static org.example.utilities.Utilities.*;
 
 public class War extends Game {
     private final Deck warDeck;
@@ -16,16 +20,16 @@ public class War extends Game {
 
     public War() {
         super("War", "In this 2 player game, a player competes against 'Bill' (the computer) to win all the cards. "
-                + "Each player starts with half the deck. "
-                + "A turn consists of each player laying a card up "
-                + "The 2 cards in play are compared. "
-                + "The person who played the highest value card, of the 2 in play, wins the cards, "
-                + "and adds them to the bottom of their pile. "
-                + "If the cards played have equal value, a war ensues! "
-                + "During a war, each player places an additional 4 cards on top of the initial card they played. "
-                + "The highest of these cards is again compared to determine the winner"
-                + "Note - a war can lead to another war"
-                + "Play continues until one player has won all cards and is the winner");
+                + "\nEach player starts with half the deck. "
+                + "\nA turn consists of each player laying a card up "
+                + "\nThe 2 cards in play are compared. "
+                + "\nThe person who played the highest value card, of the 2 in play, wins the cards, "
+                + "\nand adds them to the bottom of their pile. "
+                + "\nIf the cards played have equal value, a war ensues! "
+                + "\nDuring a war, each player places an additional 4 cards on top of the initial card they played. "
+                + "\nThe highest of these cards is again compared to determine the winner"
+                + "\nNote - a war can lead to another war"
+                + "\nPlay continues until one player has won all cards and is the winner");
         // Initialize a new deck
         warDeck = new Deck();
         warDeck.createFullDeck();
@@ -56,12 +60,12 @@ public class War extends Game {
             Card cardPlayedByBill = bill.getHand().remove(bill.getHand().size() - 1);
             cardsInPlay.add(cardPlayedByBill);
             System.out.println("Hit return when you are ready for me to play my card");
-            playCard(this::printCardsInPlay);
+            displayCards(this::printCardsInPlay);
 
             System.out.println("Your turn. Hit return when you are ready to play your card");
             Card cardPlayedByPlayerOne = playerOne.getHand().remove(playerOne.getHand().size() - 1);
             cardsInPlay.add(cardPlayedByPlayerOne);
-            playCard(this::printCardsInPlay);
+            displayCards(this::printCardsInPlay);
 
             // Compare the cards played by Bill and Player One
             int comparison = cardPlayedByBill.getValue() - cardPlayedByPlayerOne.getValue();
@@ -138,7 +142,7 @@ public class War extends Game {
         }
 
     System.out.println("Hit return when you are ready for us to play four cards each");
-    playCard(this::printCardsInPlay);
+    displayCards(this::printCardsInPlay);
 
     // Compare the last card with the fifth-to-last card
 
@@ -163,23 +167,6 @@ public class War extends Game {
                 }
     }
 
-    private void printCard(Card card) {
-        String[] lines = cardToAscii(card).split("\n");
-        for (String line : lines) {
-            System.out.println(line);
-        }
-    }
-
-    private String cardToAscii(Card card) {
-        // ASCII representation for a card
-        return " _________ \n" +
-                "|" + card.getSymbol() + "        |\n" +
-                "|" + card.getSuit().getSuitSymbol() + "        |\n" +
-                "|         |\n" +
-                "|        " + card.getSuit().getSuitSymbol() + "|\n" +
-                "|        " + card.getSymbol() + "|\n" +
-                " --------- \n";
-    }
 
     private void printCardsInPlay() {
         int numCardsInPlay = cardsInPlay.size();
@@ -206,17 +193,7 @@ public class War extends Game {
         }
     }
 
-    public static void playCard(Runnable printCardsInPlay) {
-        Scanner scanner = new Scanner(System.in);
 
-        String inputLine = scanner.nextLine(); // Read the input line
-
-        if (!inputLine.isEmpty()) {
-            System.out.println("Invalid input. Press Enter to trigger the action.");
-        } else {
-            printCardsInPlay.run();
-        }
-    }
 
     @Override
     public boolean playAgain() {
@@ -230,6 +207,21 @@ public class War extends Game {
             return false; // Return false if the user doesn't want to play again
         }
     }
+
+    //for testing
+    // Getters and setters for player hands
+    public UserInteraction getBill() {
+        return bill;
+    }
+
+    public UserInteraction getPlayerOne() {
+        return playerOne;
+    }
+
+    public List<Card> getCardsInPlay() {
+        return cardsInPlay;
+    }
+
 
 //The equalsIgnoreCase() method is a Java method used to compare two strings while ignoring their case differences.
     //can we define method playagain in game and pass the game name as a parameter
