@@ -17,8 +17,7 @@ public class Main {
             gameChoices.add("OldMaid");
 
         System.out.println("Welcome to CardsTEC - card games by Todd, Emma & Cheryl"
-        +"\n Which card game would you like to play?"
-        +"\n You can quit a game and return here at any time just hit Q!");
+        +"\n Which card game would you like to play?");
 
             int choice = commands.displayChoices(gameChoices);
 
