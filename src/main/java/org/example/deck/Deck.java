@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Deck {
 
-    private List<Card> cards = new ArrayList<>();
+    protected List<Card> cards = new ArrayList<>();
     final String[] symbols = new String[]{"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
     final Suit[] suits = new Suit[]{Suit.HEART, Suit.CLUB, Suit.SPADE, Suit.DIAMOND};
 
@@ -30,16 +30,6 @@ public class Deck {
 
     public void clearDeck() {
         cards = new ArrayList<>();
-    }
-
-    public void createFullBlackJackDeck() {
-        for (Suit suit : suits) {
-            int cardValue = 2;
-            for (String symbol : symbols) {
-                cards.add(new BlackJackCard(suit, symbol));
-                cardValue++;
-            }
-        }
     }
 
     public void createFullDeck() {

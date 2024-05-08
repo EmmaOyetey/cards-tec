@@ -2,6 +2,7 @@ package org.example.game;
 
 import org.example.card.Card;
 import org.example.commands.Commands;
+import org.example.deck.BlackJackDeck;
 import org.example.deck.Deck;
 import org.example.user.User;
 import org.example.user.UserInteraction;
@@ -31,8 +32,8 @@ public class Blackjack extends Game {
             playerFinished.add(false);
         }
 
-        Deck freshDeck = new Deck();
-        freshDeck.createFullBlackJackDeck();
+        BlackJackDeck freshDeck = new BlackJackDeck();
+        freshDeck.createFullDeck();
         freshDeck.shuffleDeck();
         this.deck = freshDeck;
     }
