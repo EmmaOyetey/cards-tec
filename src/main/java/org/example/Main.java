@@ -10,8 +10,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Blackjack blackjack = new Blackjack("Play blackjack", 3);
-        blackjack.play();
 
             Commands commands = new Commands();
             List<String> gameChoices = new ArrayList<>();
@@ -31,8 +29,9 @@ public class Main {
                     warGame.play();
                     break;
                 case 1:
-                    System.out.println("blackjack coming soon");
-                    // Add Blackjack logic
+//                    System.out.println("blackjack coming soon");
+                    Blackjack blackjack = new Blackjack("Play blackjack", 3);
+                    blackjack.play();
                     break;
                 case 2:
                     System.out.println("Old Maid coming soon");
