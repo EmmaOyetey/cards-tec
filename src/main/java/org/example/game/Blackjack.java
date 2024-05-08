@@ -32,7 +32,7 @@ public class Blackjack extends Game {
         }
 
         Deck freshDeck = new Deck();
-        freshDeck.createFullDeck();
+        freshDeck.createFullBlackJackDeck();
         freshDeck.shuffleDeck();
         this.deck = freshDeck;
     }
