@@ -1,6 +1,8 @@
 package org.example.game;
 
+import org.example.card.BlackJackCard;
 import org.example.card.Card;
+import org.example.card.Suit;
 import org.example.commands.Commands;
 import org.example.deck.BlackJackDeck;
 import org.example.deck.Deck;
@@ -8,9 +10,8 @@ import org.example.user.User;
 import org.example.user.UserInteraction;
 
 import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Blackjack extends Game {
     private Deck deck;
@@ -72,8 +73,8 @@ public class Blackjack extends Game {
             System.out.println("You chose: " + choice);
             if (choice == 0) {
                 currentPlayer.drawACard(deck.dealCard());
-                // TODO: Create new blackjack deck for correct scoring
-                int newScore = playerHand.stream().reduce(0, (subtotal, card) -> subtotal + card.getValue(), Integer::sum);
+                int newScore = currentPlayer.getHand().stream().reduce(0, (subtotal, card) -> subtotal + card.getValue(), Integer::sum);
+                playerScores.set(playerTurn, newScore);
                 System.out.println("Your score is now: " + newScore);
                 if (newScore > 21) {
                     System.out.println("You went over 21 :(");
@@ -86,10 +87,60 @@ public class Blackjack extends Game {
             gameOver = playerFinished.stream().reduce(true, (allPlayersFinished, playerFinish) -> allPlayersFinished && playerFinish, Boolean::logicalAnd);
             playerTurn = (playerTurn + 1) % playerCount;
         }
+
+        List<Integer> playersWhoScoredUnder21 = playerScores.stream().map(score -> {
+            if (score > 21) {
+                return 0;
+            }
+            return score;
+        }).collect(Collectors.toList());
+
+        Integer maxScore = playersWhoScoredUnder21.stream().max(Integer::compare).orElse(null);
+        if (maxScore == null || maxScore == 0) {
+            System.out.println("All players lose");
+        } else if (playersWhoScoredUnder21.stream().filter(score -> score.equals(maxScore)).count() == 1) {
+            System.out.println("Player " + (playersWhoScoredUnder21.indexOf(maxScore) + 1) + " wins!!!!");
+        } else {
+            List<Integer> indexesOfDrawnPlayers = new ArrayList<>();
+            for (int i = 0; i < playersWhoScoredUnder21.size(); i++) {
+                if (playersWhoScoredUnder21.get(i) == maxScore) indexesOfDrawnPlayers.add(i);
+            }
+            String drawnPlayers = String.valueOf(indexesOfDrawnPlayers.get(0) + 1);
+            for (int i = 1; i < indexesOfDrawnPlayers.size(); i++) {
+                drawnPlayers += " and " + (indexesOfDrawnPlayers.get(i) + 1);
+            }
+            System.out.println("Player " + drawnPlayers + " have drawn");
+        }
+
         System.out.println("Game finished");
+
+        playAgain();
     }
 
     public boolean playAgain() {
+        System.out.println("\nWould you like to play again?");
+        int playAgainChoice = commands.displayChoices(Arrays.asList("Yes", "No"));
+        if (playAgainChoice == 0) {
+            this.gameOver = false;
+            this.users = new ArrayList<>();
+            this.playerScores = new ArrayList<>();
+            this.playerFinished = new ArrayList<>();
+            System.out.println(this.playerCount);
+            for (int i = 0; i < this.playerCount; i++) {
+                users.add(new UserInteraction());
+                playerScores.add(0);
+                playerFinished.add(false);
+            }
+            System.out.println(this.users);
+
+            BlackJackDeck freshDeck = new BlackJackDeck();
+            freshDeck.createFullDeck();
+            freshDeck.shuffleDeck();
+            this.deck = freshDeck;
+            dealToAllPlayers();
+            play();
+            return true;
+        }
         return false;
     }
 }

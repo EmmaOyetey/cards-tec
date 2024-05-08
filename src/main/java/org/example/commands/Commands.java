@@ -17,9 +17,9 @@ public class Commands {
     public int getUserChoice(List<String> choices) {
         int input = -1;
         while (input >= choices.size() || input < 0) {
-            input = scanner.nextInt();
             System.out.printf("Please enter a number between 0 and %d\n",
                     choices.size() - 1);
+            input = scanner.nextInt();
         }
         return input;
     }
