@@ -43,16 +43,16 @@ public class War extends Game {
         // Deal cards to players
         dealInitialHands();
     }
-@Override
+
+    @Override
     public void play() {
+
         // Print players' hands before the game starts
         printTitle();
         printRules();
 
         System.out.println("--------------------------");
         System.out.println("Hey i'm Bill. Lets War!...");
-
-        dealInitialHands();
 
         // Main game loop
         while (!bill.getHand().isEmpty() && !playerOne.getHand().isEmpty()) {
@@ -76,13 +76,13 @@ public class War extends Game {
                 addCardsToHand(bill);
                 System.out.println("I win! I'll take those cards!");
                 System.out.println("Cards in my hand: " + bill.getHand().size() + " Cards in your hand : " + playerOne.getHand().size());
-                } else if (comparison < 0) {
-                    Collections.shuffle(cardsInPlay);
-                    addCardsToHand(playerOne);
-                    System.out.println("You win! i've added them to your pile");
-                    System.out.println("Cards in my hand: " + bill.getHand().size() + " Cards in your hand : " + playerOne.getHand().size());
-                    } else {
-                       war();
+            } else if (comparison < 0) {
+                Collections.shuffle(cardsInPlay);
+                addCardsToHand(playerOne);
+                System.out.println("You win! i've added them to your pile");
+                System.out.println("Cards in my hand: " + bill.getHand().size() + " Cards in your hand : " + playerOne.getHand().size());
+            } else {
+                war();
             }
 
         }
@@ -123,7 +123,7 @@ public class War extends Game {
         cardsInPlay.clear();
     }
 
-    private void war(){
+    private void war() {
         System.out.println("It's WAR!");
         if (bill.getHand().size() < 4) {
             System.out.println("You Win! I don't have enough cards for a war.");
@@ -141,30 +141,30 @@ public class War extends Game {
             cardsInPlay.add(playerOne.getHand().remove(playerOne.getHand().size() - 1)); // Add card from Player One's hand
         }
 
-    System.out.println("Hit return when you are ready for us to play four cards each");
-    displayCards(this::printCardsInPlay);
+        System.out.println("Hit return when you are ready for us to play four cards each");
+        displayCards(this::printCardsInPlay);
 
-    // Compare the last card with the fifth-to-last card
+        // Compare the last card with the fifth-to-last card
 
-    int lastIndex = cardsInPlay.size() - 1;
-    int fifthToLastIndex = lastIndex - 4;
-    Card lastCard = cardsInPlay.get(lastIndex);
-    Card fifthToLastCard = cardsInPlay.get(fifthToLastIndex);
+        int lastIndex = cardsInPlay.size() - 1;
+        int fifthToLastIndex = lastIndex - 4;
+        Card lastCard = cardsInPlay.get(lastIndex);
+        Card fifthToLastCard = cardsInPlay.get(fifthToLastIndex);
 
-    int warComparison = lastCard.getValue() - fifthToLastCard.getValue();
-    System.out.println("lastCard" + lastCard + "fifthLastCard" + fifthToLastCard);
-    // Handle the outcome of the war
-    if (warComparison > 0) {
-        addCardsToHand(playerOne);
-        System.out.println("You won the WAR and collect all the cards" );
-        System.out.println("Cards in my hand: " + bill.getHand().size() + " Cards in your hand : " + playerOne.getHand().size());
+        int warComparison = lastCard.getValue() - fifthToLastCard.getValue();
+        //System.out.println("lastCard" + lastCard + "fifthLastCard" + fifthToLastCard);
+        // Handle the outcome of the war
+        if (warComparison > 0) {
+            addCardsToHand(playerOne);
+            System.out.println("You won the WAR and collect all the cards");
+            System.out.println("Cards in my hand: " + bill.getHand().size() + " , Cards in your hand : " + playerOne.getHand().size());
         } else if (warComparison < 0) {
             addCardsToHand(bill);
             System.out.println("I won the WAR! I collect all the cards");
-            System.out.println("Cards in my hand: " + bill.getHand().size() + " Cards in your hand : " + playerOne.getHand().size());
-            } else {
-                war();
-                }
+            System.out.println("Cards in my hand: " + bill.getHand().size() + " , Cards in your hand : " + playerOne.getHand().size());
+        } else {
+            war();
+        }
     }
 
 
@@ -173,26 +173,25 @@ public class War extends Game {
 
         if (cardsInPlay.size() == 1) {
             printCard(cardsInPlay.get(0));
-            } else if (cardsInPlay.size() == 2) {
-                Card firstCard = cardsInPlay.get(0);
-                Card secondCard = cardsInPlay.get(1);
-                String[] firstCardLines = cardToAscii(firstCard).split("\n");
-                String[] secondCardLines = cardToAscii(secondCard).split("\n");
-                for (int i = 0; i < firstCardLines.length; i++) {
-                    System.out.println(firstCardLines[i] + "    " + secondCardLines[i]);
-                    }
-                } else {
-                    // More than two cards in play
-                    Card lastCard = cardsInPlay.get(numCardsInPlay - 1);
-                    Card fifthToLastCard = cardsInPlay.get(numCardsInPlay - 5);
-                    String[] firstCardLines = cardToAscii(fifthToLastCard).split("\n");
-                    String[] secondCardLines = cardToAscii(lastCard).split("\n");
-                    for (int i = 0; i < firstCardLines.length; i++) {
-                        System.out.println(firstCardLines[i] + "    " + secondCardLines[i]);
-                }
+        } else if (cardsInPlay.size() == 2) {
+            Card firstCard = cardsInPlay.get(0);
+            Card secondCard = cardsInPlay.get(1);
+            String[] firstCardLines = cardToAscii(firstCard).split("\n");
+            String[] secondCardLines = cardToAscii(secondCard).split("\n");
+            for (int i = 0; i < firstCardLines.length; i++) {
+                System.out.println(firstCardLines[i] + "    " + secondCardLines[i]);
+            }
+        } else {
+            // More than two cards in play
+            Card lastCard = cardsInPlay.get(numCardsInPlay - 1);
+            Card fifthToLastCard = cardsInPlay.get(numCardsInPlay - 5);
+            String[] firstCardLines = cardToAscii(fifthToLastCard).split("\n");
+            String[] secondCardLines = cardToAscii(lastCard).split("\n");
+            for (int i = 0; i < firstCardLines.length; i++) {
+                System.out.println(firstCardLines[i] + "    " + secondCardLines[i]);
+            }
         }
     }
-
 
 
     @Override
@@ -227,11 +226,6 @@ public class War extends Game {
     //can we define method playagain in game and pass the game name as a parameter
     //will need handling in main...
 
-
-    public static void main(String[] args) {
-        War warGame = new War();
-        warGame.play();
-    }
 
 }
 
