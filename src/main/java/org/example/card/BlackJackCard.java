@@ -16,10 +16,6 @@ public class BlackJackCard extends Card {
         symbolValueLookup.put("J", 10);
     }
 
-    public BlackJackCard() {
-        super(null, null, 0);
-    }
-
     public BlackJackCard(Suit suit, String symbol) {
         super(suit, symbol, symbolValueLookup.get(symbol));
     }
