@@ -39,3 +39,10 @@ Suit Enum: The Suit enum represents the four standard playing card suits (diamon
 It demonstrates the use of enums to define a fixed set of constants, promoting code readability and maintainability.
 BlackJackCard: Extends the Card class, introducing Blackjack-specific functionality. It utilizes a static initialization block to map card symbols to their corresponding Blackjack values, 
 The Card class and its related classes provide a modular and reusable foundation for representing and manipulating playing cards in various card games.
+
+Utilities class.
+This class uses static methods for common tasks.
+It provides utility methods for printing cards in ASCII art format and handling user input for displaying cards during gameplay. 
+The printCard method formats a card's details into ASCII art and prints it to the console. 
+The displayCards method prompts the user to press Enter to continue the game, ensuring smooth gameplay flow. 
+
