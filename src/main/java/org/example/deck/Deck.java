@@ -44,7 +44,7 @@ public class Deck {
     }
 //convert to a ternary?
     //added User user to parameter - need to overload?
-    public Card dealCard(User user) {
+    public Card dealCard() {
         if (cards.isEmpty()) {
             return null;
         }
