@@ -58,3 +58,9 @@ It displays a welcome message and prompts the user to choose a card game.
 It creates an instance of GameLoader, which implements ChooseGame.
 Inside a do-while loop, it repeatedly loads a game using the GameLoader and executes the game's logic.
 
+War
+The War class represents a simplified version of the card game "War" and extends the Game abstract class,inheriting common functionality such as printing the game title, rules, and determining whether to play again
+The class encapsulates the logic for playing the game of War. It includes methods for setting up the game, dealing cards, handling player turns, resolving wars, checking for winners, and facilitating play again functionality.
+Methods include; dealInitialHands(), war(), and reset() encapsulating specific aspects of the game's functionality, promoting modularity and maintainability.
+It utilizes composition by creating instances of the Deck and UserInteraction classes (warDeck, bill, playerOne). This allows it to encapsulate related functionality and manage interactions between different components of the game.
+The class interacts with users through console input and output, allowing them to play the game and decide whether to play again, highlighting the interaction between the game logic and user input/output.
