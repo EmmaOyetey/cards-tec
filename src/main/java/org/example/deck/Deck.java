@@ -14,9 +14,9 @@ public class Deck {
     final String[] symbols = new String[]{"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
     final Suit[] suits = new Suit[]{Suit.HEART, Suit.CLUB, Suit.SPADE, Suit.DIAMOND};
 
-    public Deck() {
-        createFullDeck();
-    }
+//    public Deck() {
+//        createFullDeck();
+//    }
 
     public List<Card> getCards() {
         return cards;
