@@ -5,14 +5,18 @@ Welcome to CardsTEC, a collection of multiple card games developed in Java, show
 CardsTEC offers a variety of classic card games, including War, Blackjack, and Old Maid, each implemented with a focus on OOP principles such as encapsulation, inheritance, and polymorphism. The project structure promotes code modularity, extensibility, and maintainability, allowing for easy addition of new games in the future.
 
 ## **Collaborators and Ownership**
-•	War: Developed by Emma Oyetey , the War class encapsulates the logic for playing the game of War, a simplified card game where players compete to win all the cards.
-•	Blackjack: Todd undertook the implementation of Blackjack, a popular casino card game, focusing on creating Blackjack-specific functionalities.
-•	Old Maid: Cheryl took the lead in implementing Old Maid, another classic card game, which adds diversity to the collection of available games.
+**War**: Developed by Emma Oyetey , the War class encapsulates the logic for playing the game of War, a simplified card game where players compete to win all the cards.
+
+**Blackjack**: Todd undertook the implementation of Blackjack, a popular casino card game, focusing on creating Blackjack-specific functionalities.
+
+**Old Maid**: Cheryl took the lead in implementing Old Maid, another classic card game, which adds diversity to the collection of available games.
 
 ## **Shared Components and Collaboration**
-•	**User Interaction:** Collaboratively worked on, the User and UserInteraction classes provide a foundation for representing users and their interactions with the game. These classes demonstrate OOP principles and facilitate smooth gameplay interactions.
-•	**Game:** The abstract Game class, along with its subclasses (War, Blackjack, Old Maid), lays the groundwork for consistent game implementations. It promotes code reuse, encapsulation, and polymorphism, enabling the creation of diverse card games with a unified structure.
-•	**Card and Related Classes:** Developed collectively, the Card class, along with its related classes (SortBySuitThenValue, Suit Enum, BlackJackCard), provides a modular and reusable foundation for representing and manipulating playing cards in various card games.
+**User Interaction:** Collaboratively worked on, the User and UserInteraction classes provide a foundation for representing users and their interactions with the game. These classes demonstrate OOP principles and facilitate smooth gameplay interactions.
+
+**Game:** The abstract Game class, along with its subclasses (War, Blackjack, Old Maid), lays the groundwork for consistent game implementations. It promotes code reuse, encapsulation, and polymorphism, enabling the creation of diverse card games with a unified structure.
+
+**Card and Related Classes:** Developed collectively, the Card class, along with its related classes (SortBySuitThenValue, Suit Enum, BlackJackCard), provides a modular and reusable foundation for representing and manipulating playing cards in various card games.
 
 ## **Getting Started**
 To start playing, simply run the Main class, which serves as the entry point for the program. Follow the prompts to choose a card game from the available options, and enjoy hours of entertainment with CardsTEC!
