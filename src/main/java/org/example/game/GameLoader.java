@@ -23,11 +23,11 @@ public class GameLoader implements ChooseGame {
             case 0:
                 return new War();
             case 1:
-                return new Blackjack("Play blackjack", 3);
+                return new Blackjack();
             case 2:
                 return new OldMaid();
             default:
-                return new Blackjack("Play blackjack", 3);
+                return new Blackjack();
         }
     }
 }
