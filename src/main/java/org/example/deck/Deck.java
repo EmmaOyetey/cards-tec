@@ -35,6 +35,17 @@ public class Deck {
             }
         }
     }
+
+    public void createDemoDeck() {
+        clearDeck(); // Clear the deck before adding new cards
+        for (Suit suit : suits) {
+            // Add cards 7, 10, Jack, King for each suit
+            cards.add(new Card(suit, "7", 7)); // Add 7
+            cards.add(new Card(suit, "10", 10)); // Add 10
+            cards.add(new Card(suit, "J", 11)); // Add Jack
+            cards.add(new Card(suit, "K", 13)); // Add King
+        }
+    }
 //convert to a ternary?
     //added User user to parameter - need to overload?
     public Card dealCard() {
