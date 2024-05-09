@@ -137,16 +137,15 @@ public class Blackjack extends Game {
             printCard(cardHand.get(0));
         } else if (cardHand.size() > 1) {
             List<String[]> deconstructedDisplayLines = new ArrayList<>();
-            for (int i = 0; i < cardHand.size(); i++) {
-                String[] cardLines = cardToAscii(cardHand.get(i)).split("\n");
+            for (Card card : cardHand) {
+                String[] cardLines = cardToAscii(card).split("\n");
                 deconstructedDisplayLines.add(cardLines);
             }
 
             for (int i = 0; i < deconstructedDisplayLines.get(0).length; i++) {
                 StringBuilder displayLine = new StringBuilder();
-                for (int j = 0; j < deconstructedDisplayLines.size(); j++) {
-                    displayLine.append(deconstructedDisplayLines.get(j)[i]);
-
+                for (String[] deconstructedDisplayLine : deconstructedDisplayLines) {
+                    displayLine.append(deconstructedDisplayLine[i]);
                 }
                 System.out.println(displayLine);
             }
