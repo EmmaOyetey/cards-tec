@@ -19,7 +19,7 @@ public class Blackjack extends Game {
     private int playerTurn = 0;
     private boolean gameOver = false;
     private Commands commands = new Commands();
-    private static final List<String> choices = Arrays.asList("Hit", "Stay");
+    private static final List<String> playerChoices = Arrays.asList("Hit", "Stay");
     private List<Integer> playerScores = new ArrayList<>();
     private List<Boolean> playerFinished = new ArrayList<>();
 
@@ -65,7 +65,7 @@ public class Blackjack extends Game {
 
         while (!gameOver) {
             if (playerFinished.get(playerTurn)) {
-                System.out.println("Player " + (playerTurn + 1) + " is done for this round");
+                System.out.println("\n\nPlayer " + (playerTurn + 1) + " is done for this round");
                 playerTurn = (playerTurn + 1) % playerCount;
                 continue;
             }
@@ -79,8 +79,8 @@ public class Blackjack extends Game {
             displayCards(playerHand);
             System.out.println("Current score: " + playerScores.get(playerTurn));
 
-            int choice = commands.displayChoices(choices);
-            System.out.println("You chose: " + choices.get(choice));
+            int choice = commands.displayChoices(playerChoices);
+            System.out.println("You chose: " + playerChoices.get(choice));
 
             if (choice == 1) {
                 playerFinished.set(playerTurn, true);
