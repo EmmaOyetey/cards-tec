@@ -51,36 +51,40 @@ public class Blackjack extends Game {
         printTitle();
         printRules();
         dealToAllPlayers();
+
         while (!gameOver) {
             if (playerFinished.get(playerTurn)) {
                 System.out.println("Player " + (playerTurn + 1) + " is done for this round");
                 playerTurn = (playerTurn + 1) % playerCount;
                 continue;
             }
+
             UserInteraction currentPlayer = users.get(playerTurn);
-            System.out.println("Player " + (playerTurn + 1) + "'s turn:");
+            System.out.println("\n\nPlayer " + (playerTurn + 1) + "'s turn:");
 
             ArrayList<Card> playerHand = currentPlayer.getHand();
             playerScores.set(playerTurn, playerHand.stream()
                     .reduce(0, (subtotal, card) -> subtotal + card.getValue(), Integer::sum));
 
-            System.out.println(playerHand);
+            displayCards(playerHand);
             System.out.println("Score: " + playerScores.get(playerTurn));
 
-            // TODO: Fix the display of choice confirmation in Commands
             int choice = commands.displayChoices(choices);
             System.out.println("You chose: " + choice);
-            if (choice == 0) {
+
+            if (choice == 1) {
+                playerFinished.set(playerTurn, true);
+            } else {
                 currentPlayer.drawACard(deck.dealCard());
-                int newScore = currentPlayer.getHand().stream().reduce(0, (subtotal, card) -> subtotal + card.getValue(), Integer::sum);
+                playerHand = currentPlayer.getHand();
+                displayCards(playerHand);
+                int newScore = playerHand.stream().reduce(0, (subtotal, card) -> subtotal + card.getValue(), Integer::sum);
                 playerScores.set(playerTurn, newScore);
                 System.out.println("Your score is now: " + newScore);
                 if (newScore > 21) {
                     System.out.println("You went over 21 :(");
                     playerFinished.set(playerTurn, true);
                 }
-            } else {
-                playerFinished.set(playerTurn, true);
             }
 
             gameOver = playerFinished.stream().reduce(true, (allPlayersFinished, playerFinish) -> allPlayersFinished && playerFinish, Boolean::logicalAnd);
@@ -95,6 +99,7 @@ public class Blackjack extends Game {
         }).collect(Collectors.toList());
 
         Integer maxScore = playersWhoScoredUnder21.stream().max(Integer::compare).orElse(null);
+
         if (maxScore == null || maxScore == 0) {
             System.out.println("All players lose");
         } else if (playersWhoScoredUnder21.stream().filter(score -> score.equals(maxScore)).count() == 1) {
@@ -112,6 +117,19 @@ public class Blackjack extends Game {
         }
 
         System.out.println("Game finished");
+    }
+
+    private void displayMatchResult() {
+
+    }
+
+    private List<Integer> getWinningPlayers() {
+
+        return Arrays.asList();
+    }
+
+    private void displayCards(List<Card> cardHand) {
+        System.out.println(cardHand);
     }
 
     public boolean playAgain() {
