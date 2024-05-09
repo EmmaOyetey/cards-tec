@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.commands.Commands;
 import org.example.game.Blackjack;
+import org.example.game.OldMaid;
 import org.example.game.War;
 
 import java.util.ArrayList;
@@ -34,11 +35,13 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Old Maid coming soon");
-                    // Add your oldmaid logic
+                    OldMaid oldMaid = new OldMaid();
+                    oldMaid.play();
                 default:
                     System.out.println("Invalid choice!");
                     break;
             }
+
 
 
     }
