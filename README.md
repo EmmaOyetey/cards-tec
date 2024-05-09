@@ -46,3 +46,15 @@ It provides utility methods for printing cards in ASCII art format and handling 
 The printCard method formats a card's details into ASCII art and prints it to the console. 
 The displayCards method prompts the user to press Enter to continue the game, ensuring smooth gameplay flow. 
 
+GameLoader and the ChooseGame Interface:
+GameLoader is a class responsible for loading different card gamesbased on user input/choice. It returns an instance of the selected game (either War, Blackjack, or Old Maid).
+It implements the ChooseGame interface, ensuring consistency in how games are selected and loaded, requiring methods for printing available games and choosing a game.
+The printGames method displays the names of available games.
+The chooseGame method prompts the user to choose a game using the Commands class, which handles user input.
+
+Main Class:
+The Main class serves as the entry point for the program, it orchestrates the entire process of game selection and execution.
+It displays a welcome message and prompts the user to choose a card game.
+It creates an instance of GameLoader, which implements ChooseGame.
+Inside a do-while loop, it repeatedly loads a game using the GameLoader and executes the game's logic.
+
