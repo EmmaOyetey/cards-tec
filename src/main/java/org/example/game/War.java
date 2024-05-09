@@ -94,7 +94,6 @@ public class War extends Game {
 
         }
 
-
         if (!isNoWinner) {
             if (playerOne.getHand().size() < bill.getHand().size()) {
                 System.out.println("Ahhh better luck next time! I win!");
@@ -104,17 +103,8 @@ public class War extends Game {
         }
 
         if (playAgain()) {
-            warDeck.clearDeck();
-            warDeck.createDemoDeck();
-            warDeck.shuffleDeck();
-
-            isNoWinner = true;
-            cardsInPlay.clear();
-            bill.getHand().clear();
-            playerOne.getHand().clear();
-            dealInitialHands();
+            reset();
             play();
-
             } else {
                 System.out.println("Thanks for playing!");
             }
@@ -122,7 +112,6 @@ public class War extends Game {
 
     private void dealInitialHands() {
 
-        // Deal cards to players alternately until their hands are full
         while (bill.getHand().size() < 26 && playerOne.getHand().size() < 26) {
 
             Card cardForBill = warDeck.dealCard();
@@ -144,14 +133,15 @@ public class War extends Game {
 
     private void war() {
         System.out.println("It's WAR!");
-        if (bill.getHand().size() < 4) {
-            System.out.println("I don't have enough cards for a war.");
+
+        if ((bill.getHand().size()<4) || (playerOne.getHand().size()< 4)) {
             isNoWinner = false;
-            return;
-        }
-        if (playerOne.getHand().size() < 4) {
-            System.out.println("You don't have enough cards for a war.");
-            isNoWinner = false;
+            if (bill.getHand().size() < 4) {
+                System.out.println("I don't have enough cards for a war.");
+            } else {
+                System.out.println("You don't have enough cards for a war");
+            }
+
             return;
         }
 
@@ -165,7 +155,6 @@ public class War extends Game {
         System.out.println("Hit return when you are ready for us to play four cards each");
         displayCards(this::printCardsInPlay);
 
-        // Compare the last card with the fifth-to-last card
 
         int lastIndex = cardsInPlay.size() - 1;
         int fifthToLastIndex = lastIndex - 4;
@@ -173,18 +162,19 @@ public class War extends Game {
         Card fifthToLastCard = cardsInPlay.get(fifthToLastIndex);
 
         int warComparison = lastCard.getValue() - fifthToLastCard.getValue();
-        //System.out.println("lastCard" + lastCard + "fifthLastCard" + fifthToLastCard);
-        // Handle the outcome of the war
+
         if (warComparison > 0) {
             addCardsToHand(playerOne);
             System.out.println("You won the WAR and collect all the cards");
+            System.out.println("Cards in my hand: " + bill.getHand().size() + " Cards in your hand : " + playerOne.getHand().size());
         } else if (warComparison < 0) {
             addCardsToHand(bill);
             System.out.println("I won the WAR! I collect all the cards");
+            System.out.println("Cards in my hand: " + bill.getHand().size() + " Cards in your hand : " + playerOne.getHand().size());
         } else {
             war();
         }
-        System.out.println("Cards in my hand: " + bill.getHand().size() + " Cards in your hand : " + playerOne.getHand().size());
+
     }
 
     private void printCardsInPlay() {
@@ -212,7 +202,6 @@ public class War extends Game {
         }
     }
 
-
     @Override
     public boolean playAgain() {
 
@@ -220,6 +209,17 @@ public class War extends Game {
         Scanner scanner = new Scanner(System.in);
         String playAgain = scanner.nextLine();
         return playAgain.equalsIgnoreCase("yes"); // Return true if the user wants to play again
+    }
+
+    private void reset(){
+        warDeck.clearDeck();
+        warDeck.createDemoDeck();
+        warDeck.shuffleDeck();
+        isNoWinner = true;
+        cardsInPlay.clear();
+        bill.getHand().clear();
+        playerOne.getHand().clear();
+        dealInitialHands();
     }
 
 }
