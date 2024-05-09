@@ -23,15 +23,16 @@ public class Blackjack extends Game {
     private List<Integer> playerScores = new ArrayList<>();
     private List<Boolean> playerFinished = new ArrayList<>();
 
-    public Blackjack(String rules) {
+    public Blackjack() {
         // TODO: Iron out ruleset, add to gameLoader
-//        You and fellow players are initially dealt two cards each.
-        // Your score is the total value of cards in your hand.
-//        The highest score you can achieve is 21 (an Ace and a card valued 10), that’s Blackjack!
-//        If you have a total at or below 21, decide whether you wish to ‘draw’ or ‘stay’.
-//        You can continue to draw cards until you are happy with your hand.
-        // The winner is the player with the highest score!
-        super("Blackjack", rules);
+        super("Blackjack",
+                "\n\nYou and fellow players are initially dealt two cards each." +
+                        "\nYour score is the total value of cards in your hand." +
+                        "\nThe highest score you can achieve is 21 (an Ace and a card valued 10),that’s Blackjack !" +
+                        "\nIf you have a total at or below 21, decide whether you wish to ‘draw’or ‘stay’." +
+                        "\nYou can continue to draw cards until you are happy with your hand." +
+                        "\nThe winner is the player with the highest score !"
+        );
         int playerCount = 0;
         while (!(playerCount > 1)) {
             playerCount = commands.getUserInteger("Please choose the number of players (must be more than 1)");
@@ -58,9 +59,8 @@ public class Blackjack extends Game {
     }
 
     public void play() {
-        System.out.println("Welcome to ");
+        System.out.println("\n\nWelcome to ");
         printTitle();
-        printRules();
         dealToAllPlayers();
 
         while (!gameOver) {
@@ -102,7 +102,6 @@ public class Blackjack extends Game {
         }
 
         resolveGameOutcome();
-        System.out.println("Game finished");
     }
 
     private void resolveGameOutcome() {
@@ -116,18 +115,17 @@ public class Blackjack extends Game {
         Integer maxScore = playersWhoScoredUnder21.stream().max(Integer::compare).orElse(null);
 
         if (maxScore == null || maxScore == 0) {
-            System.out.println("All players lose");
+            System.out.println("\nAll players lose");
         } else if (playersWhoScoredUnder21.stream().filter(score -> score.equals(maxScore)).count() == 1) {
-            System.out.println("Player " + (playersWhoScoredUnder21.indexOf(maxScore) + 1) + " wins!!!!");
+            System.out.println("\nPlayer " + (playersWhoScoredUnder21.indexOf(maxScore) + 1) + " wins!!!!");
         } else {
             List<Integer> indexesOfDrawnPlayers = getDrawnPlayersIndexes(playerScores);
             StringBuilder drawnPlayersString = new StringBuilder(String.valueOf(indexesOfDrawnPlayers.get(0) + 1));
             for (int i = 1; i < indexesOfDrawnPlayers.size(); i++) {
                 drawnPlayersString.append(" and ").append(indexesOfDrawnPlayers.get(i) + 1);
             }
-            System.out.println("Player " + drawnPlayersString + " have drawn");
+            System.out.println("\nPlayer " + drawnPlayersString + " have drawn");
         }
-
     }
 
     private List<Integer> getDrawnPlayersIndexes(List<Integer> playersWhoScoredUnder21) {
