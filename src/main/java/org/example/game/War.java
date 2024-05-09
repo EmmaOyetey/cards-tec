@@ -106,11 +106,11 @@ public class War extends Game {
         // Deal cards to players alternately until their hands are full
         while (bill.getHand().size() < 26 && playerOne.getHand().size() < 26) {
 
-            Card cardForBill = warDeck.dealCard(bill);
+            Card cardForBill = warDeck.dealCard();
             if (cardForBill == null) break; // Deck is empty
             bill.drawACard(cardForBill);
 
-            Card cardForPlayerOne = warDeck.dealCard(playerOne);
+            Card cardForPlayerOne = warDeck.dealCard();
             if (cardForPlayerOne == null) break; // Deck is empty
             playerOne.drawACard(cardForPlayerOne);
         }

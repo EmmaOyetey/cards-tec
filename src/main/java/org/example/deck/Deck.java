@@ -1,10 +1,8 @@
 package org.example.deck;
 
-import org.example.card.BlackJackCard;
 import org.example.card.Card;
 import org.example.card.SortBySuitThenValue;
 import org.example.card.Suit;
-import org.example.user.User;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,7 +42,7 @@ public class Deck {
     }
 //convert to a ternary?
     //added User user to parameter - need to overload?
-    public Card dealCard(User user) {
+    public Card dealCard() {
         if (cards.isEmpty()) {
             return null;
         }
