@@ -13,6 +13,19 @@ public class Commands {
 
         return getUserChoice(choices);
     }
+    public int getUserInteger(String validationMessage) {
+        Scanner scanner = new Scanner(System.in);
+        int playerCount = -1;
+        while (!(playerCount > -1)) {
+            System.out.println(validationMessage);
+            try {
+                playerCount = scanner.nextInt();
+            } catch (Exception error) {
+                scanner.nextLine();
+            }
+        }
+        return playerCount;
+    }
 
     public int getUserChoice(List<String> choices) {
         int input = -1;

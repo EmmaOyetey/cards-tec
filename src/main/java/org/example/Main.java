@@ -1,10 +1,8 @@
 package org.example;
 
-import org.example.commands.Commands;
-import org.example.game.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.example.game.ChooseGame;
+import org.example.game.Game;
+import org.example.game.GameLoader;
 
 public class Main {
     public static void main(String[] args) {

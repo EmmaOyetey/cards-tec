@@ -23,11 +23,19 @@ public class Blackjack extends Game {
     private List<Integer> playerScores = new ArrayList<>();
     private List<Boolean> playerFinished = new ArrayList<>();
 
-    public Blackjack(String rules, int playerCount) {
+    public Blackjack(String rules) {
         // TODO: Iron out ruleset, add to gameLoader
-        // Quick and dirty rules
-//        Place a bet in the betting areas marked on the table. You and fellow players are dealt two cards each whilst the dealer is dealt one face up. If your first 2 cards add up to 21 (an Ace and a card valued 10), that’s Blackjack! If they have any other total, decide whether you wish to ‘draw’ or ‘stay’. You can continue to draw cards until you are happy with your hand.
+//        You and fellow players are initially dealt two cards each.
+        // Your score is the total value of cards in your hand.
+//        The highest score you can achieve is 21 (an Ace and a card valued 10), that’s Blackjack!
+//        If you have a total at or below 21, decide whether you wish to ‘draw’ or ‘stay’.
+//        You can continue to draw cards until you are happy with your hand.
+        // The winner is the player with the highest score!
         super("Blackjack", rules);
+        int playerCount = 0;
+        while (!(playerCount > 1)) {
+            playerCount = commands.getUserInteger("Please choose the number of players (must be more than 1)");
+        }
         this.playerCount = playerCount;
         for (int i = 0; i < playerCount; i++) {
             users.add(new UserInteraction());
@@ -66,8 +74,7 @@ public class Blackjack extends Game {
             System.out.println("\n\nPlayer " + (playerTurn + 1) + "'s turn:");
 
             ArrayList<Card> playerHand = currentPlayer.getHand();
-            playerScores.set(playerTurn, playerHand.stream()
-                    .reduce(0, (subtotal, card) -> subtotal + card.getValue(), Integer::sum));
+            playerScores.set(playerTurn, playerHand.stream().reduce(0, (subtotal, card) -> subtotal + card.getValue(), Integer::sum));
 
             displayCards(playerHand);
             System.out.println("Current score: " + playerScores.get(playerTurn));
