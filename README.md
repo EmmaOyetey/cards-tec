@@ -29,3 +29,13 @@ The play() method n this class defines the main game loop and controls the flow 
 The playAgain() method prompts the user to decide whether to play the game again after a round or session has ended. Subclasses can customize this behavior as needed.
 This class promotes code reuse, encapsulation, and polymorphism, making it easier to develop and maintain a variety of card games with consistent structure and behavior.
 
+Card class 
+The Card Class represents a playing card, encapsulating card attributes such as value, symbol, and suit, which are set through the constructor and accessed via getter methods. 
+Methods include getValue(), getSymbol(), and getSuit() which enable retrieval of card attributes,and setValue() and setSymbol() which allow modification of card properties. 
+These facilitate data abstraction and manipulation while maintaining encapsulation.
+Related Classes:
+SortBySuitThenValue: This class implements a comparator to sort cards first by suit and then by value. It demonstrates encapsulation by separating the sorting logic from the card class itself, adhering to the single responsibility principle.
+Suit Enum: The Suit enum represents the four standard playing card suits (diamond, spade, club, heart) with their respective symbols. 
+It demonstrates the use of enums to define a fixed set of constants, promoting code readability and maintainability.
+BlackJackCard: Extends the Card class, introducing Blackjack-specific functionality. It utilizes a static initialization block to map card symbols to their corresponding Blackjack values, 
+The Card class and its related classes provide a modular and reusable foundation for representing and manipulating playing cards in various card games.
