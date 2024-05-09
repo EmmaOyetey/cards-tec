@@ -39,7 +39,6 @@ public class War extends Game {
         bill = new UserInteraction();
         playerOne = new UserInteraction();
         cardsInPlay = new ArrayList<>();
-
         // Deal cards to players
         dealInitialHands();
     }
