@@ -3,6 +3,7 @@ import org.example.card.Card;
 import org.example.deck.Deck;
 import org.example.user.UserInteraction;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -29,7 +30,7 @@ public class OldMaid extends Game {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        printRules();
+//        printRules();
         System.out.println();
         System.out.println("====================");
     }
@@ -238,7 +239,11 @@ public class OldMaid extends Game {
     }
 
     public int getPlayerOnesChoice(int currentSizeOfHand) {
-        // Validation needed
+        List<String> acceptedInputs = new ArrayList<>();
+
+        for (int i = 1; i < currentSizeOfHand+1; i++) {
+            acceptedInputs.add(String.valueOf(i));
+        }
 
         System.out.println("Player One, it's your turn.");
         try {
@@ -252,6 +257,10 @@ public class OldMaid extends Game {
 
         String userInput = scanner.nextLine().trim();
 
+        while (!acceptedInputs.contains(userInput)) {
+            System.out.println("Not a valid option. Please choose a card number between 1 and " + currentSizeOfHand + " to add to your hand.");
+            userInput = scanner.nextLine().trim();
+        }
         return Integer.parseInt(userInput);
     }
 
@@ -297,13 +306,13 @@ public class OldMaid extends Game {
     public void checkForWin() {
         if(computer.getHand().isEmpty()) {
             System.out.println( "\n" + "====================");
-            System.out.println("\n" + "Oh no, the computer matched all their cards. Game over.");
-            System.out.println("The old maid was: " + oldMaid);
+            System.out.println("\n" + "OH NO, THE COMPUTER MATCHED ALL THEIR CARDS. GAME OVER.");
+            System.out.println("THE OLD MAID WAS: " + "["+oldMaid+"]");
             System.out.println("\n" + "====================");
         } else {
             System.out.println( "\n" + "====================");
-            System.out.println("\n" + "Well done, you've matched up all your cards. You win!");
-            System.out.println("The old maid was: " + oldMaid);
+            System.out.println("\n" + "WELL DONE, YOU'VE MATCHED UP ALL YOUR CARDS. YOU WIN!");
+            System.out.println("THE OLD MAID WAS: " + "["+oldMaid+"]");
             System.out.println("\n" + "====================");
         }
         printPlayerHands();
