@@ -1,28 +1,24 @@
 package org.example.game;
 
-import org.example.card.BlackJackCard;
 import org.example.card.Card;
-import org.example.card.Suit;
 import org.example.commands.Commands;
 import org.example.deck.BlackJackDeck;
 import org.example.deck.Deck;
-import org.example.user.User;
 import org.example.user.UserInteraction;
 
-import java.sql.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Blackjack extends Game {
     private Deck deck;
     private List<UserInteraction> users = new ArrayList<>();
-    private int playerCount = 0;
+    private int playerCount;
     private int playerTurn = 0;
     private boolean gameOver = false;
     private Commands commands = new Commands();
-    static final List<String> choices = Arrays.asList("Hit", "Stay");
-    private List<Integer> playerScores = new ArrayList<Integer>();
-    private List<Boolean> playerFinished = new ArrayList<Boolean>();
+    private static final List<String> choices = Arrays.asList("Hit", "Stay");
+    private List<Integer> playerScores = new ArrayList<>();
+    private List<Boolean> playerFinished = new ArrayList<>();
 
     public Blackjack(String rules, int playerCount) {
         // TODO: Iron out ruleset, add to gameLoader
@@ -106,11 +102,11 @@ public class Blackjack extends Game {
         } else {
             List<Integer> indexesOfDrawnPlayers = new ArrayList<>();
             for (int i = 0; i < playersWhoScoredUnder21.size(); i++) {
-                if (playersWhoScoredUnder21.get(i) == maxScore) indexesOfDrawnPlayers.add(i);
+                if (Objects.equals(playersWhoScoredUnder21.get(i), maxScore)) indexesOfDrawnPlayers.add(i);
             }
-            String drawnPlayers = String.valueOf(indexesOfDrawnPlayers.get(0) + 1);
+            StringBuilder drawnPlayers = new StringBuilder(String.valueOf(indexesOfDrawnPlayers.get(0) + 1));
             for (int i = 1; i < indexesOfDrawnPlayers.size(); i++) {
-                drawnPlayers += " and " + (indexesOfDrawnPlayers.get(i) + 1);
+                drawnPlayers.append(" and ").append(indexesOfDrawnPlayers.get(i) + 1);
             }
             System.out.println("Player " + drawnPlayers + " have drawn");
         }
@@ -119,29 +115,8 @@ public class Blackjack extends Game {
     }
 
     public boolean playAgain() {
-        System.out.println("\nWould you like to play again?");
+        System.out.println("\nWould you like to play another game?");
         int playAgainChoice = commands.displayChoices(Arrays.asList("Yes", "No"));
-        if (playAgainChoice == 0) {
-            this.gameOver = false;
-            this.users = new ArrayList<>();
-            this.playerScores = new ArrayList<>();
-            this.playerFinished = new ArrayList<>();
-            System.out.println(this.playerCount);
-            for (int i = 0; i < this.playerCount; i++) {
-                users.add(new UserInteraction());
-                playerScores.add(0);
-                playerFinished.add(false);
-            }
-            System.out.println(this.users);
-
-            BlackJackDeck freshDeck = new BlackJackDeck();
-            freshDeck.createFullDeck();
-            freshDeck.shuffleDeck();
-            this.deck = freshDeck;
-            dealToAllPlayers();
-            play();
-            return true;
-        }
-        return false;
+        return playAgainChoice == 0;
     }
 }
