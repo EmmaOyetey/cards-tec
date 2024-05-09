@@ -9,6 +9,9 @@ import org.example.user.UserInteraction;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.example.utilities.Utilities.cardToAscii;
+import static org.example.utilities.Utilities.printCard;
+
 public class Blackjack extends Game {
     private Deck deck;
     private List<UserInteraction> users = new ArrayList<>();
@@ -67,10 +70,10 @@ public class Blackjack extends Game {
                     .reduce(0, (subtotal, card) -> subtotal + card.getValue(), Integer::sum));
 
             displayCards(playerHand);
-            System.out.println("Score: " + playerScores.get(playerTurn));
+            System.out.println("Current score: " + playerScores.get(playerTurn));
 
             int choice = commands.displayChoices(choices);
-            System.out.println("You chose: " + choice);
+            System.out.println("You chose: " + choices.get(choice));
 
             if (choice == 1) {
                 playerFinished.set(playerTurn, true);
@@ -91,6 +94,11 @@ public class Blackjack extends Game {
             playerTurn = (playerTurn + 1) % playerCount;
         }
 
+        resolveGameOutcome();
+        System.out.println("Game finished");
+    }
+
+    private void resolveGameOutcome() {
         List<Integer> playersWhoScoredUnder21 = playerScores.stream().map(score -> {
             if (score > 21) {
                 return 0;
@@ -105,31 +113,44 @@ public class Blackjack extends Game {
         } else if (playersWhoScoredUnder21.stream().filter(score -> score.equals(maxScore)).count() == 1) {
             System.out.println("Player " + (playersWhoScoredUnder21.indexOf(maxScore) + 1) + " wins!!!!");
         } else {
-            List<Integer> indexesOfDrawnPlayers = new ArrayList<>();
-            for (int i = 0; i < playersWhoScoredUnder21.size(); i++) {
-                if (Objects.equals(playersWhoScoredUnder21.get(i), maxScore)) indexesOfDrawnPlayers.add(i);
-            }
-            StringBuilder drawnPlayers = new StringBuilder(String.valueOf(indexesOfDrawnPlayers.get(0) + 1));
+            List<Integer> indexesOfDrawnPlayers = getDrawnPlayersIndexes(playerScores);
+            StringBuilder drawnPlayersString = new StringBuilder(String.valueOf(indexesOfDrawnPlayers.get(0) + 1));
             for (int i = 1; i < indexesOfDrawnPlayers.size(); i++) {
-                drawnPlayers.append(" and ").append(indexesOfDrawnPlayers.get(i) + 1);
+                drawnPlayersString.append(" and ").append(indexesOfDrawnPlayers.get(i) + 1);
             }
-            System.out.println("Player " + drawnPlayers + " have drawn");
+            System.out.println("Player " + drawnPlayersString + " have drawn");
         }
 
-        System.out.println("Game finished");
     }
 
-    private void displayMatchResult() {
-
-    }
-
-    private List<Integer> getWinningPlayers() {
-
-        return Arrays.asList();
+    private List<Integer> getDrawnPlayersIndexes(List<Integer> playersWhoScoredUnder21) {
+        Integer maxScore = playersWhoScoredUnder21.stream().max(Integer::compare).orElse(null);
+        List<Integer> indexesOfDrawnPlayers = new ArrayList<>();
+        for (int i = 0; i < playersWhoScoredUnder21.size(); i++) {
+            if (Objects.equals(playersWhoScoredUnder21.get(i), maxScore)) indexesOfDrawnPlayers.add(i);
+        }
+        return indexesOfDrawnPlayers;
     }
 
     private void displayCards(List<Card> cardHand) {
-        System.out.println(cardHand);
+        if (cardHand.size() == 1) {
+            printCard(cardHand.get(0));
+        } else if (cardHand.size() > 1) {
+            List<String[]> deconstructedDisplayLines = new ArrayList<>();
+            for (int i = 0; i < cardHand.size(); i++) {
+                String[] cardLines = cardToAscii(cardHand.get(i)).split("\n");
+                deconstructedDisplayLines.add(cardLines);
+            }
+
+            for (int i = 0; i < deconstructedDisplayLines.get(0).length; i++) {
+                StringBuilder displayLine = new StringBuilder();
+                for (int j = 0; j < deconstructedDisplayLines.size(); j++) {
+                    displayLine.append(deconstructedDisplayLines.get(j)[i]);
+
+                }
+                System.out.println(displayLine);
+            }
+        }
     }
 
     public boolean playAgain() {
