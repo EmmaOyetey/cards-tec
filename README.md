@@ -45,6 +45,21 @@ It demonstrates the use of enums to define a fixed set of constants, promoting c
 **BlackJackCard:** Extends the Card class, introducing Blackjack-specific functionality. It utilizes a static initialization block to map card symbols to their corresponding Blackjack values, 
 The Card class and its related classes provide a modular and reusable foundation for representing and manipulating playing cards in various card games.
 
+
+### **/ Deck**
+**Deck**
+The Deck class manages a collection of playing cards, providing the foundation for managing decks of playing cards across the various card games, and offers operations for deck management. 
+It abstracts the complexity of managing a deck, simplifying common operations like shuffling, sorting, and dealing
+It's instance variables including cards, symbols, and suits are private or final, hiding implementation details.
+It provides methods like createFullDeck() and createDemoDeck() for initializing the deck with standard or demo cards. 
+Additional methods include shuffleDeck(), sortDeck(), and dealCard() which encapsulate deck manipulation, promoting abstraction and code organization.
+Deck utilizes composition by including functionality from Card, SortBySuitThenValue, and Suit. 
+Polymorphism is demonstrated through method overloading in sortDeck(), enabling different sorting strategies.
+The class encapsulates behavior related to deck management, facilitating code reuse and maintainability.
+
+**BlackJackDeck**
+The BlackJackDeck class extends Deck and overrides the createFullDeck() method to initialize a deck specifically tailored for Blackjack, utilizing BlackJackCard instances.
+
 ### **/ User** 
 **User**
 This class represents a generic user and serves as a blueprint for creating user objects in your game.
