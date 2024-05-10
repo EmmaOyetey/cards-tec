@@ -10,12 +10,12 @@ import java.util.Scanner;
 public class OldMaid extends Game {
     private Deck deck = new Deck();
     private Card oldMaid;
-    private UserInteraction computer = new UserInteraction();
-    private UserInteraction playerOne = new UserInteraction();
+    private final UserInteraction computer = new UserInteraction();
+    private final UserInteraction playerOne = new UserInteraction();
     private boolean computersTurn = false;
 
     public OldMaid() {
-        super("Old Maid", "Take turns to select a card from the opponent's hand." + "\nIf you have a card with a matching value in your hand, that pair of cards will be removed from your hand." + "\nBe the first to pair off all your cards to win." + "\nIf you are left with the odd card out (old maid) at the end, you lose the game. Good luck." );
+        super("Old Maid", "Take turns to select a card from the opponent's hand." + "\nIf you have a card with a matching value in your hand, that pair of cards will be removed from your hand." + "\nBe the first to pair off all your cards to win." + "\nIf you are left with the odd card out (old maid) at the end, you lose the game. Good luck." + "\n\n====================");
 
         printWelcomeMessage();
     }
@@ -25,14 +25,7 @@ public class OldMaid extends Game {
         System.out.print("Let's play ");
         printTitle();
         System.out.println("====================" + "\n");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-//        printRules();
-        System.out.println();
-        System.out.println("====================");
+        pause();
     }
 
     public void setupCards() {
@@ -44,31 +37,15 @@ public class OldMaid extends Game {
         removeAllPairs(playerOne);
         computer.shuffleHand();
         playerOne.shuffleHand();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        pause();
         System.out.println("\n" + "Let's start! The cards have been dealt and the pairs removed." + "\n");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        pause();
         printNumberOfCardsInEachHand();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        pause();
         System.out.println("====================");
         System.out.println("Old maid is: [CARD]");
         System.out.println("====================");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        pause();
         printPlayerHands();
     }
 
@@ -97,6 +74,14 @@ public class OldMaid extends Game {
         }
     }
 
+    public void pause() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void play() {
         setupCards();
@@ -104,30 +89,22 @@ public class OldMaid extends Game {
             handleGameLogic();
         }
         checkForWin();
-        boolean playAgain = playAgain();
+//        boolean playAgain = playAgain();
 
-        if (playAgain) {
-            reset();
-            play();
-        } else {
-            System.out.println("Thanks for playing! Goodbye.");
-        }
+//        if (playAgain) {
+//            reset();
+//            play();
+//        } else {
+//            System.out.println("Thanks for playing! Goodbye.");
+//        }
     }
 
     public void handleGameLogic() {
         if(computersTurn) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            pause();
             System.out.println("Computer's turn:");
             System.out.println();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            pause();
             getComputerChoice();
             boolean isThereAMatch = checkPlayersHandForPair(computer);
 
@@ -135,11 +112,7 @@ public class OldMaid extends Game {
                 System.out.println("No match found. Shuffling cards…");
                 computer.shuffleHand();
             }
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            pause();
 
             if (!computer.getHand().isEmpty() && !playerOne.getHand().isEmpty()) {
                 printPlayerHands();
@@ -147,37 +120,21 @@ public class OldMaid extends Game {
                 computersTurn = false;
             }
         } else {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            pause();
             int chosenIndex = getPlayerOnesChoice(computer.getHand().size());
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            pause();
             System.out.println("You chose to take card " + chosenIndex + "\n");
 
             Card chosenCard = computer.getHand().get(chosenIndex-1);
             playerOne.drawACard(chosenCard);
             computer.removeCardByIndex(chosenIndex-1);
             boolean isThereAMatch = checkPlayersHandForPair(playerOne);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            pause();
             if(!isThereAMatch) {
                 System.out.println("No match found. Shuffling cards…");
                 playerOne.shuffleHand();
             }
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            pause();
             if (!computer.getHand().isEmpty() && !playerOne.getHand().isEmpty()) {
                 printPlayerHands();
                 System.out.println();
@@ -217,11 +174,7 @@ public class OldMaid extends Game {
         System.out.println();
         System.out.println("Computer's hand ("  + computersHand.size() + "):" + "\n" + computersHand);
         System.out.println();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        pause();
         System.out.println("Player One's hand ("  + playerOne.getHand().size() + "):" + "\n" + playerOnesHand);
         System.out.println();
         System.out.println("====================");
@@ -229,11 +182,8 @@ public class OldMaid extends Game {
 
     public void printNumberOfCardsInEachHand() {
         System.out.println("Computer has " +  computer.getHand().size() + " cards remaining");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        pause();
+
         System.out.println("Player One has " +  playerOne.getHand().size() + " cards remaining");
         System.out.println();
     }
@@ -246,11 +196,7 @@ public class OldMaid extends Game {
         }
 
         System.out.println("Player One, it's your turn.");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        pause();
         System.out.println("\nComputer has " + currentSizeOfHand + " cards remaining - please choose a card number between 1 and " + currentSizeOfHand + " to add to your hand.");
 
         Scanner scanner = new Scanner(System.in);
@@ -267,11 +213,7 @@ public class OldMaid extends Game {
     public void getComputerChoice() {
         Random random = new Random();
         int randomIndex = random.nextInt(playerOne.getHand().size());
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        pause();
         System.out.println("Computer chose to take card " + (randomIndex+1) + " from Player One's hand" + "\n");
         Card chosenCard = playerOne.getHand().get(randomIndex);
         computer.drawACard(chosenCard);
@@ -280,17 +222,9 @@ public class OldMaid extends Game {
 
     public boolean checkPlayersHandForPair(UserInteraction player) {
         Card cardToCheck = player.getHand().get(player.getHand().size()-1);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        pause();
         System.out.println("Card to check: [" + cardToCheck.getSuit().getSuitSymbol() + " " + cardToCheck.getSymbol() + "]" + "\n");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        pause();
         for (int i = 0; i < player.getHand().size()-1; i++) {
             if(cardToCheck.getSymbol().equals(player.getHand().get(i).getSymbol())) {
 
@@ -334,11 +268,11 @@ public class OldMaid extends Game {
         return answer.equals("Y");
     }
 
-    public void reset() {
-        deck.clearDeck();
-        computer = new UserInteraction();
-        playerOne = new UserInteraction();
-        computersTurn = false;
-    }
+//    public void reset() {
+//        deck.clearDeck();
+//        computer = new UserInteraction();
+//        playerOne = new UserInteraction();
+//        computersTurn = false;
+//    }
 
 }
