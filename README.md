@@ -58,7 +58,7 @@ Polymorphism is demonstrated through method overloading in sortDeck(), enabling 
 The class encapsulates behavior related to deck management, facilitating code reuse and maintainability.
 
 **BlackJackDeck**
-The BlackJackDeck class extends Deck and overrides the createFullDeck() method to initialize a deck specifically tailored for Blackjack, utilizing BlackJackCard instances.
+The BlackJackDeck class extends Deck and overrides the createFullDeck() method to initialize a deck specifically tailored for Blackjack, utilizing BlackJackCard instances. In effect, it changes only the values of the card to match to Blackjack rules, i.e. King = 10, Ace = 11 etc.
 
 ### **/ User** 
 **User**
