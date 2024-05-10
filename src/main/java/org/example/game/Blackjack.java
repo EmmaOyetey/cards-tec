@@ -104,6 +104,35 @@ public class Blackjack extends Game {
         resolveGameOutcome();
     }
 
+    private void displayCards(List<Card> cardHand) {
+        if (cardHand.size() == 1) {
+            printCard(cardHand.get(0));
+        } else if (cardHand.size() > 1) {
+            List<String[]> deconstructedDisplayLines = new ArrayList<>();
+            for (Card card : cardHand) {
+                String[] cardLines = cardToAscii(card).split("\n");
+                deconstructedDisplayLines.add(cardLines);
+            }
+
+            for (int i = 0; i < deconstructedDisplayLines.get(0).length; i++) {
+                StringBuilder displayLine = new StringBuilder();
+                for (String[] deconstructedDisplayLine : deconstructedDisplayLines) {
+                    displayLine.append(deconstructedDisplayLine[i]);
+                }
+                System.out.println(displayLine);
+            }
+        }
+    }
+
+    private List<Integer> getDrawnPlayersIndexes(List<Integer> playersWhoScoredUnder21) {
+        Integer maxScore = playersWhoScoredUnder21.stream().max(Integer::compare).orElse(null);
+        List<Integer> indexesOfDrawnPlayers = new ArrayList<>();
+        for (int i = 0; i < playersWhoScoredUnder21.size(); i++) {
+            if (Objects.equals(playersWhoScoredUnder21.get(i), maxScore)) indexesOfDrawnPlayers.add(i);
+        }
+        return indexesOfDrawnPlayers;
+    }
+
     private void resolveGameOutcome() {
         List<Integer> playersWhoScoredUnder21 = playerScores.stream().map(score -> {
             if (score > 21) {
@@ -125,35 +154,6 @@ public class Blackjack extends Game {
                 drawnPlayersString.append(" and ").append(indexesOfDrawnPlayers.get(i) + 1);
             }
             System.out.println("\nPlayer " + drawnPlayersString + " have drawn");
-        }
-    }
-
-    private List<Integer> getDrawnPlayersIndexes(List<Integer> playersWhoScoredUnder21) {
-        Integer maxScore = playersWhoScoredUnder21.stream().max(Integer::compare).orElse(null);
-        List<Integer> indexesOfDrawnPlayers = new ArrayList<>();
-        for (int i = 0; i < playersWhoScoredUnder21.size(); i++) {
-            if (Objects.equals(playersWhoScoredUnder21.get(i), maxScore)) indexesOfDrawnPlayers.add(i);
-        }
-        return indexesOfDrawnPlayers;
-    }
-
-    private void displayCards(List<Card> cardHand) {
-        if (cardHand.size() == 1) {
-            printCard(cardHand.get(0));
-        } else if (cardHand.size() > 1) {
-            List<String[]> deconstructedDisplayLines = new ArrayList<>();
-            for (Card card : cardHand) {
-                String[] cardLines = cardToAscii(card).split("\n");
-                deconstructedDisplayLines.add(cardLines);
-            }
-
-            for (int i = 0; i < deconstructedDisplayLines.get(0).length; i++) {
-                StringBuilder displayLine = new StringBuilder();
-                for (String[] deconstructedDisplayLine : deconstructedDisplayLines) {
-                    displayLine.append(deconstructedDisplayLine[i]);
-                }
-                System.out.println(displayLine);
-            }
         }
     }
 

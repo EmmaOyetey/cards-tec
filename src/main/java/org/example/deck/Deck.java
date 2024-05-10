@@ -14,10 +14,6 @@ public class Deck {
     final String[] symbols = new String[]{"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
     final Suit[] suits = new Suit[]{Suit.HEART, Suit.CLUB, Suit.SPADE, Suit.DIAMOND};
 
-//    public Deck() {
-//        createFullDeck();
-//    }
-
     public List<Card> getCards() {
         return cards;
     }
@@ -46,8 +42,7 @@ public class Deck {
             cards.add(new Card(suit, "K", 13)); // Add King
         }
     }
-//convert to a ternary?
-    //added User user to parameter - need to overload?
+
     public Card dealCard() {
         if (cards.isEmpty()) {
             return null;

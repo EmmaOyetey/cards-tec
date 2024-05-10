@@ -13,14 +13,3 @@ public class SortBySuitThenValue implements Comparator<Card> {
         }
     }
 }
-
-//        if( left.getSuit() == right.getSuit() ) {
-//        System.out.println(left.getValue() - right.getValue());
-//        return left.getValue() - right.getValue();
-//
-//    } else {
-//        System.out.println(left.getSuit().getSuitLetter() - right.getSuit().getSuitLetter());
-//        return left.getSuit().getSuitLetter() - right.getSuit().getSuitLetter();
-//    }
-//
-//}

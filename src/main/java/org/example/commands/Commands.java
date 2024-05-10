@@ -42,19 +42,4 @@ public class Commands {
         String input = scanner.next().trim();
         return input.equalsIgnoreCase("Q");
     }
-
-//    public int getUserChoice(List<String> choices) {
-//        int input = -1;
-//        while (input >= choices.size() || input < 0) {
-//            input = scanner.nextInt();
-//            if (input >= choices.size() || input < 0) {
-//                System.out.printf("Please enter a number between 0 and %d",
-//                        choices.size() - 1);
-//            }
-//        }
-//        return input;
-//    }
-
-
-
 }
