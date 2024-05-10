@@ -107,3 +107,8 @@ The class encapsulates the logic for playing the game of War. It includes method
 Methods include; dealInitialHands(), war(), and reset() encapsulating specific aspects of the game's functionality, promoting modularity and maintainability.
 It utilizes composition by creating instances of the Deck and UserInteraction classes (warDeck, bill, playerOne). This allows it to encapsulate related functionality and manage interactions between different components of the game.
 The class interacts with users through console input and output, allowing them to play the game and decide whether to play again, highlighting the interaction between the game logic and user input/output.
+
+**Old Maid**
+The OldMaid class houses a simple version of the classic family card game Old Maid. The class extends the abstract Game class and implements the inherited functionality, in addition to having its own methods specific to the Old Maid game.
+
+The game has been built following OOP principles and interacts with instances of the other shared classes across all 3 games such as the Deck, Card, and UserInteraction to create a user-friendly command line game. The game interacts with players through the console allowing players to enter inputs and receive game feedback output.

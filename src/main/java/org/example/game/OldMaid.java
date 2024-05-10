@@ -89,14 +89,6 @@ public class OldMaid extends Game {
             handleGameLogic();
         }
         checkForWin();
-//        boolean playAgain = playAgain();
-
-//        if (playAgain) {
-//            reset();
-//            play();
-//        } else {
-//            System.out.println("Thanks for playing! Goodbye.");
-//        }
     }
 
     public void handleGameLogic() {
@@ -109,7 +101,9 @@ public class OldMaid extends Game {
             boolean isThereAMatch = checkPlayersHandForPair(computer);
 
             if(!isThereAMatch) {
-                System.out.println("No match found. Shuffling cards…");
+                System.out.println("===================================");
+                System.out.println("| No match found. Shuffling cards… |");
+                System.out.println("===================================");
                 computer.shuffleHand();
             }
             pause();
@@ -131,7 +125,9 @@ public class OldMaid extends Game {
             boolean isThereAMatch = checkPlayersHandForPair(playerOne);
             pause();
             if(!isThereAMatch) {
-                System.out.println("No match found. Shuffling cards…");
+                System.out.println("===================================");
+                System.out.println("| No match found. Shuffling cards… |");
+                System.out.println("===================================");
                 playerOne.shuffleHand();
             }
             pause();
@@ -227,8 +223,9 @@ public class OldMaid extends Game {
         pause();
         for (int i = 0; i < player.getHand().size()-1; i++) {
             if(cardToCheck.getSymbol().equals(player.getHand().get(i).getSymbol())) {
-
-                System.out.println("There's a MATCH. Pair removed from hand.");
+                System.out.println("===========================================");
+                System.out.println("| There's a MATCH! Pair removed from hand. |");
+                System.out.println("===========================================");
                 player.removeCardByIndex(i);
                 player.removeCardByIndex(player.getHand().size()-1);
                 return true;
@@ -267,12 +264,4 @@ public class OldMaid extends Game {
         }
         return answer.equals("Y");
     }
-
-//    public void reset() {
-//        deck.clearDeck();
-//        computer = new UserInteraction();
-//        playerOne = new UserInteraction();
-//        computersTurn = false;
-//    }
-
 }
