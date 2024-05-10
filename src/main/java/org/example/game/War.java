@@ -46,14 +46,11 @@ public class War extends Game {
     @Override
     public void play() {
 
-        // Print players' hands before the game starts
         printTitle();
-        printRules();
 
         System.out.println("--------------------------");
         System.out.println("Hey i'm Bill. Lets War!...");
 
-        // Main game loop
         while (isNoWinner) {
 
             if (bill.getHand().isEmpty() || playerOne.getHand().isEmpty()) {
@@ -102,14 +99,7 @@ public class War extends Game {
             }
         }
 
-        if (playAgain()) {
-            reset();
-            play();
-            } else {
-                System.out.println("Thanks for playing!");
-            }
-        }
-
+    }
     private void dealInitialHands() {
 
         while (bill.getHand().size() < 26 && playerOne.getHand().size() < 26) {
@@ -141,7 +131,6 @@ public class War extends Game {
             } else {
                 System.out.println("You don't have enough cards for a war");
             }
-
             return;
         }
 
@@ -208,19 +197,7 @@ public class War extends Game {
         System.out.println("Do you want to play again? (yes/no): ");
         Scanner scanner = new Scanner(System.in);
         String playAgain = scanner.nextLine();
-        return playAgain.equalsIgnoreCase("yes"); // Return true if the user wants to play again
+        return playAgain.equalsIgnoreCase("yes");
     }
-
-    private void reset(){
-        warDeck.clearDeck();
-        warDeck.createDemoDeck();
-        warDeck.shuffleDeck();
-        isNoWinner = true;
-        cardsInPlay.clear();
-        bill.getHand().clear();
-        playerOne.getHand().clear();
-        dealInitialHands();
-    }
-
 }
 
