@@ -15,16 +15,16 @@ public class Commands {
     }
     public int getUserInteger(String validationMessage) {
         Scanner scanner = new Scanner(System.in);
-        int playerCount = -1;
-        while (!(playerCount > -1)) {
+        int playerChoice = -1;
+        while (!(playerChoice > -1)) {
             System.out.println(validationMessage);
             try {
-                playerCount = scanner.nextInt();
+                playerChoice = scanner.nextInt();
             } catch (Exception error) {
                 scanner.nextLine();
             }
         }
-        return playerCount;
+        return playerChoice;
     }
 
     public int getUserChoice(List<String> choices) {
@@ -32,7 +32,11 @@ public class Commands {
         while (input >= choices.size() || input < 0) {
             System.out.printf("Please enter a number between 0 and %d\n",
                     choices.size() - 1);
-            input = scanner.nextInt();
+            try {
+                input = scanner.nextInt();
+            } catch (Exception error) {
+                scanner.nextLine();
+            }
         }
         return input;
     }
