@@ -1,4 +1,4 @@
-package org.example.commands;
+package org.example.commands;0
 
 import java.util.List;
 import java.util.Scanner;
