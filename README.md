@@ -5,7 +5,7 @@ Welcome to CardsTEC, a collection of multiple card games developed in Java, show
 CardsTEC offers a variety of classic card games, including War, Blackjack, and Old Maid, each implemented with a focus on OOP principles such as encapsulation, inheritance, and polymorphism. The project structure promotes code modularity, extensibility, and maintainability, allowing for easy addition of new games in the future.
 
 ## **Collaborators and Ownership**
-**War**: Developed by Emma Oyetey , the War class encapsulates the logic for playing the game of War, a simplified card game where players compete to win all the cards.
+**War**: Developed by Emma , the War class encapsulates the logic for playing the game of War, a simplified card game where players compete to win all the cards.
 
 **Blackjack**: Todd undertook the implementation of Blackjack, a popular casino card game, focusing on creating Blackjack-specific functionalities.
 
